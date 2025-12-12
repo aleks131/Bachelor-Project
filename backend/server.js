@@ -599,18 +599,46 @@ server.listen(PORT, '0.0.0.0', () => {
     });
     console.log(`  - Monitoring Dashboard (/monitoring)`);
     
-    setupWatchers();
-    logger.info('File watchers initialized');
-    console.log('File watchers initialized');
-    
-    const users = auth.getAllUsers();
-    monitoring.updateUserMetrics(users);
-    logger.info('Monitoring system initialized');
-    console.log('Monitoring system initialized');
-    
-    logger.info('Server startup complete', {
-        port: PORT,
-        apps: Object.keys(config.apps).length,
-        users: users.length
-    });
+    try {
+        setupWatchers();
+        logger.info('File watchers initialized');
+        console.log('File watchers initialized');
+        
+        const users = auth.getAllUsers();
+        monitoring.updateUserMetrics(users);
+        logger.info('Monitoring system initialized');
+        console.log('Monitoring system initialized');
+        
+        logger.info('Server startup complete', {
+            port: PORT,
+            apps: Object.keys(config.apps).length,
+            users: users.length
+        });
+    } catch (error) {
+        console.error('Error during startup:', error);
+        logger.error('Startup error', error);
+    }
+});
+
+server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.error(`\n❌ ERROR: Port ${PORT} is already in use!`);
+        console.error('Please stop the existing server or change the port in data/config.json\n');
+        logger.error('Port in use', { port: PORT, error: err });
+    } else {
+        console.error('\n❌ Server error:', err);
+        logger.error('Server error', err);
+    }
+    process.exit(1);
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('\n❌ Uncaught Exception:', err);
+    logger.error('Uncaught exception', err);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('\n❌ Unhandled Rejection at:', promise, 'reason:', reason);
+    logger.error('Unhandled rejection', { reason, promise });
 });
