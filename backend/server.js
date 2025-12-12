@@ -114,20 +114,22 @@ const requireAuth = (req, res, next) => {
 };
 
 app.use(express.static(path.join(__dirname, '../frontend'), {
-    maxAge: '1d',
-    etag: true,
-    lastModified: true,
+    maxAge: 0,
+    etag: false,
+    lastModified: false,
     setHeaders: (res, filePath) => {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        
         if (filePath.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-            res.setHeader('Cache-Control', 'public, max-age=86400');
+            res.setHeader('Content-Type', 'text/css; charset=utf-8');
         } else if (filePath.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-            res.setHeader('Cache-Control', 'public, max-age=86400');
+            res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
         } else if (filePath.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'no-cache');
-        } else if (filePath.endsWith('.svg') || filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
-            res.setHeader('Cache-Control', 'public, max-age=31536000');
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        } else if (filePath.endsWith('.svg')) {
+            res.setHeader('Content-Type', 'image/svg+xml');
         }
     }
 }));
