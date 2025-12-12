@@ -51,9 +51,9 @@ class NotificationSystem {
 
     createNotification(title, options = {}) {
         const defaultOptions = {
-            icon: '/assets/salling.png',
-            badge: '/assets/salling.png',
-            tag: 'salling-notification',
+            icon: '/assets/triple-a-logo.svg',
+            badge: '/assets/triple-a-logo.svg',
+            tag: 'smart-solutions-notification',
             requireInteraction: false,
             ...options
         };
@@ -94,7 +94,7 @@ class NotificationSystem {
 
         this.showNotification(actionText[action] || 'File changed', {
             body: filePath.split(/[/\\]/).pop(),
-            icon: '/assets/salling.png',
+            icon: '/assets/triple-a-logo.svg',
             type: 'file_change',
             onClick: () => {
                 // Could open file or refresh view
