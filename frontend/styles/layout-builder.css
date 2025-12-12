@@ -1,0 +1,405 @@
+:root {
+    --builder-primary: #1a237e;
+    --builder-secondary: #0d47a1;
+    --builder-accent: #2962ff;
+    --builder-grid: #e0e0e0;
+    --builder-widget: #ffffff;
+    --builder-border: #c0c0c0;
+    --builder-hover: #f0f7ff;
+    --builder-selected: #2962ff;
+}
+
+.layout-builder-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f5f7fa;
+}
+
+.builder-header {
+    background: linear-gradient(to right, var(--builder-primary), var(--builder-secondary));
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.builder-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.widget-palette {
+    width: 280px;
+    background: white;
+    border-right: 2px solid var(--builder-border);
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.widget-palette h3 {
+    margin: 0 0 1rem 0;
+    color: var(--builder-primary);
+}
+
+.category-section {
+    margin-bottom: 1.5rem;
+}
+
+.category-section h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.widget-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.widget-item {
+    padding: 0.75rem;
+    background: var(--builder-widget);
+    border: 2px solid var(--builder-border);
+    border-radius: 8px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.widget-item:hover {
+    border-color: var(--builder-accent);
+    background: var(--builder-hover);
+    transform: translateX(4px);
+}
+
+.widget-item:active {
+    cursor: grabbing;
+}
+
+.widget-item i {
+    font-size: 1.2rem;
+    color: var(--builder-primary);
+    width: 24px;
+    text-align: center;
+}
+
+.widget-item-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--builder-primary);
+}
+
+.builder-canvas {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fafafa;
+    overflow: hidden;
+}
+
+.canvas-toolbar {
+    background: white;
+    border-bottom: 2px solid var(--builder-border);
+    padding: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toolbar-group label {
+    font-weight: 500;
+    color: #666;
+    white-space: nowrap;
+}
+
+.canvas-grid {
+    flex: 1;
+    padding: 1rem;
+    overflow: auto;
+    background-image: 
+        linear-gradient(var(--builder-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--builder-grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+    position: relative;
+}
+
+.canvas-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #999;
+    text-align: center;
+}
+
+.canvas-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.canvas-placeholder p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.canvas-placeholder .hint {
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.widget-instance {
+    position: absolute;
+    background: white;
+    border: 2px solid var(--builder-border);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: move;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    min-height: 100px;
+}
+
+.widget-instance:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--builder-accent);
+}
+
+.widget-instance.selected {
+    border-color: var(--builder-selected);
+    border-width: 3px;
+    box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.2);
+}
+
+.widget-instance .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.widget-instance .widget-title {
+    font-weight: 600;
+    color: var(--builder-primary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.widget-instance .widget-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.widget-instance .widget-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: #666;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.widget-instance .widget-action-btn:hover {
+    background: #f0f0f0;
+    color: var(--builder-primary);
+}
+
+.widget-instance .widget-content {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.widget-instance .widget-preview {
+    width: 100%;
+    height: 100%;
+}
+
+.widget-resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: var(--builder-accent);
+    cursor: nwse-resize;
+    border-radius: 8px 0 8px 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.widget-instance:hover .widget-resize-handle,
+.widget-instance.selected .widget-resize-handle {
+    opacity: 1;
+}
+
+.properties-panel {
+    width: 300px;
+    background: white;
+    border-left: 2px solid var(--builder-border);
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.properties-panel h3 {
+    margin: 0 0 1rem 0;
+    color: var(--builder-primary);
+}
+
+.no-selection {
+    color: #999;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+}
+
+.property-group {
+    margin-bottom: 1.5rem;
+}
+
+.property-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.property-group input,
+.property-group select,
+.property-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--builder-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.property-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.property-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.property-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.grid-preview {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0.5rem;
+    background: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.grid-cell {
+    background: white;
+    border: 1px dashed #ccc;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--builder-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--builder-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--builder-primary);
+    border: 2px solid var(--builder-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--builder-primary);
+    color: white;
+}
+
+.modal-fullscreen {
+    width: 95vw;
+    height: 95vh;
+    max-width: none;
+    max-height: none;
+}
+
+.layout-renderer {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: #fafafa;
+}
+
+.layout-renderer .widget-instance {
+    position: static;
+    margin-bottom: 1rem;
+}

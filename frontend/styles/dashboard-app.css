@@ -1,0 +1,4083 @@
+/* Performance Dashboard Styles */
+.performance-dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #333;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.dashboard-grid {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.sidebar-column {
+    width: 320px; /* Increased width to match main grid columns */
+    min-width: 320px; /* Ensure minimum width */
+    border-right: 2px solid #333;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+.main-grid-area {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 10px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure all columns have equal width */
+.grid-column {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Remove specific styling for the last column (which was PROCESS) */
+.grid-column:last-child {
+    margin-right: 0;
+}
+
+.category-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-size: 22px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.kpi-card {
+    border: 1px solid #0066cc;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex: none; /* Fixed size */
+    width: 100%;
+    height: 180px; /* Fixed height for all cards */
+    min-height: 180px; /* Match height */
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0; /* Remove bottom margin */
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-card:last-child {
+    margin-bottom: 0;
+}
+
+.kpi-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-indicator {
+    display: none !important;
+}
+
+.indicator-dot {
+    display: none !important;
+}
+
+.kpi-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.kpi-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    color: #333366;
+}
+
+.kpi-number {
+    font-size: 36px;
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+.kpi-number.red {
+    color: #cc0000;
+}
+
+.kpi-number.blue {
+    color: #0066cc;
+}
+
+.kpi-number.yellow {
+    color: #ffcc00;
+}
+
+/* Fullscreen KPI card styles */
+.kpi-card.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kpi-card.fullscreen .kpi-content {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kpi-card.fullscreen .kpi-title,
+.kpi-card.fullscreen .kpi-number,
+.kpi-card.fullscreen .kpi-indicator {
+    display: none !important;
+}
+
+.kpi-card.fullscreen .kpi-image-container {
+    width: 100%;
+    height: 100%; /* Fill entire card */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.kpi-card.fullscreen .kpi-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+}
+
+/* Show image on hover in normal mode */
+.kpi-card:hover .kpi-image-container {
+    display: block !important;
+}
+
+.kpi-card:hover .kpi-title,
+.kpi-card:hover .kpi-number {
+    display: none !important;
+}
+
+/* Exception for process card */
+.kpi-card.fullscreen.process-card .process-checklist {
+    max-height: none;
+    overflow-y: visible;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fullscreen exit button */
+.fullscreen-exit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2000;
+    transition: all 0.3s ease;
+}
+
+.fullscreen-exit:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.fullscreen-exit i {
+    font-size: 18px;
+}
+
+/* Animation for fullscreen transition */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.kpi-card.fullscreen {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Loading indicator */
+.loading-indicator {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s ease-in-out infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Error message styling */
+.image-error {
+    color: #e74c3c;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.image-path {
+    color: #7f8c8d;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    word-break: break-all;
+}
+
+/* Mobile adjustments - also good for TV displays */
+@media (max-width: 1920px) {
+    .dashboard-header h1 {
+        font-size: 32px;
+    }
+    
+    .category-header {
+        font-size: 22px;
+        padding: 8px;
+    }
+    
+    .kpi-title {
+        font-size: 18px;
+    }
+    
+    .kpi-number {
+        font-size: 36px;
+    }
+}
+
+/* Large TV display optimizations */
+@media (min-width: 1921px) {
+    .dashboard-header h1 {
+        font-size: 42px;
+    }
+    
+    .category-header {
+        font-size: 28px;
+        padding: 12px;
+    }
+    
+    .kpi-title {
+        font-size: 24px;
+    }
+    
+    .kpi-number {
+        font-size: 48px;
+    }
+    
+    .kpi-card {
+        min-height: 120px;
+    }
+    
+    .kpi-card.fullscreen .kpi-title {
+        font-size: 60px;
+    }
+    
+    .kpi-card.fullscreen .kpi-number {
+        font-size: 220px;
+    }
+}
+
+:root {
+    /* Clean white theme */
+    --primary-color: #1a237e;  /* Dark blue */
+    --secondary-color: #0d47a1; /* Slightly lighter blue */
+    --accent-color: #2962ff;   /* Bright blue */
+    --background-color: #ffffff; /* Pure white background */
+    --text-color: #1a237e;     /* Dark blue text */
+    --success-color: #00c853;
+    --error-color: #d50000;
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+    --card-shadow: 0 4px 8px rgba(26, 35, 126, 0.15);
+    --hover-shadow: 0 6px 12px rgba(26, 35, 126, 0.25);
+    --border-color: #1a237e;   /* Dark blue border */
+}
+
+/* Remove dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #1a237e;
+        --secondary-color: #0d47a1;
+        --accent-color: #2962ff;
+        --background-color: #ffffff;
+        --text-color: #1a237e;
+        --card-bg: #ffffff;
+        --card-shadow: 0 4px 8px rgba(26, 35, 126, 0.15);
+        --hover-shadow: 0 6px 12px rgba(26, 35, 126, 0.25);
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.app-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-color);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    background: linear-gradient(to right, #ffffff, #f8f9ff);
+    border-bottom: 2px solid var(--primary-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+}
+
+.app-header:hover {
+    background: #ffffff;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-left: 1rem;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #ffffff;
+    border: 2px solid var(--primary-color);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.1);
+}
+
+.control-group {
+    display: flex;
+    gap: 0.25rem;
+    padding: 5px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.control-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: var(--primary-color);
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+}
+
+.control-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(26, 35, 126, 0.2);
+}
+
+.control-btn i {
+    font-size: 1.2rem;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    border: none;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Mode buttons */
+.mode-controls {
+    display: flex;
+    gap: 0.5rem;
+    background: #ffffff;
+    padding: 0.25rem;
+    border-radius: 12px;
+}
+
+.mode-btn {
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+}
+
+.mode-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Folder select */
+.folder-select.minimal {
+    padding: 0.7rem 2.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.folder-select.minimal option {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    padding: 0.5rem;
+}
+
+.select-wrapper {
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s ease;
+}
+
+.select-wrapper:hover {
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+    transform: translateY(-1px);
+}
+
+.select-wrapper i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Main content adjustments - remove margin-top */
+.main-content {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #ffffff;
+    background-image: linear-gradient(rgba(26, 35, 126, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(26, 35, 126, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Fullscreen adjustments */
+.fullscreen-active .app-header {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fullscreen-active .app-header:hover {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+        gap: 0.5rem;
+    }
+
+    .nav-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .select-wrapper {
+        min-width: 120px;
+        flex: 1;
+    }
+
+    .control-group {
+        flex: none;
+    }
+
+    .control-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .control-btn i {
+        font-size: 1rem;
+    }
+}
+
+.mode-btn i {
+    font-size: 1.2rem;
+}
+
+.logo-container {
+    width: 180px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.controls-panel {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin: 0 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.folder-controls {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+select {
+    appearance: none;
+    background: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+select:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(41, 98, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(41, 98, 255, 0.2);
+}
+
+.select-wrapper::after {
+    content: '▼';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    pointer-events: none;
+    font-size: 0.8rem;
+}
+
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.mode-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    flex: 1;
+    background-color: #ffffff;
+}
+
+.mode-content.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Split view layout */
+.split-view {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    height: calc(98vh - 80px);
+    min-height: 600px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.left-section {
+    flex: 0.35;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #ffffff;
+}
+
+.numbers-container {
+    flex: 0.3; /* 30% of left section */
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--border-color);
+    padding: 10px;
+}
+
+.plan-container {
+    flex: 0.7; /* 70% of left section */
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+    padding: 10px;
+}
+
+.plan-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.slideshow-container {
+    flex: 0.65;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+}
+
+/* Image styling */
+.numbers-container img,
+.plan-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Fullscreen adjustments */
+.fullscreen .split-view {
+    height: 100vh;
+    padding: 0;
+    gap: 0;
+    background: #ffffff;
+}
+
+.fullscreen .left-section {
+    gap: 0;
+}
+
+.fullscreen .numbers-container,
+.fullscreen .plan-container,
+.fullscreen .slideshow-container {
+    border-radius: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .split-view {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .left-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .numbers-container {
+        height: 30vh;
+    }
+
+    .plan-container {
+        height: 40vh;
+    }
+
+    .slideshow-container {
+        flex: none;
+        height: 50vh;
+    }
+}
+
+#meeting-content .slideshow-container {
+    flex: 1;
+    background-color: #ffffff;
+}
+
+.media-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.media-container img,
+.media-container video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transform-origin: center;
+    padding: 10px;
+    opacity: 1;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.media-container video {
+    width: 100%;
+    height: 100%;
+}
+
+/* Single definition for fullscreen exit button - both modes */
+.fullscreen-exit {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 100000 !important;
+    background: #ffffff;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 12px !important;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin: 0 !important;
+    width: 48px !important;
+    height: 48px !important;
+    justify-content: center !important;
+}
+
+.fullscreen-exit:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 16px rgba(26, 35, 126, 0.25) !important;
+}
+
+/* Show exit button in fullscreen for both modes */
+.split-view.fullscreen .fullscreen-exit,
+.slideshow-container.fullscreen .fullscreen-exit,
+#meeting-content.fullscreen .fullscreen-exit,
+#meeting-content .slideshow-container.fullscreen .fullscreen-exit {
+    display: flex !important;
+}
+
+.fullscreen-exit i {
+    font-size: 1.2rem;
+    margin: 0 !important;
+}
+
+/* Fullscreen mode adjustments */
+.split-view.fullscreen,
+.slideshow-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.fullscreen .media-container {
+    height: 100vh;
+}
+
+.fullscreen .media-container img,
+.fullscreen .media-container video {
+    max-height: 100vh;
+    padding: 20px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .app-container {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .controls-panel {
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .folder-controls {
+        flex-direction: column;
+    }
+
+    .split-view {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .plan-container,
+    #meeting-content .slideshow-container {
+        height: 45vh;
+        flex: none;
+    }
+
+    .control-btn {
+        padding: 0.8rem 1.5rem;
+        min-width: 100px;
+        font-size: 0.9rem;
+    }
+
+    .control-btn i {
+    font-size: 1rem;
+        margin-right: 0.3rem;
+    }
+
+    select {
+        padding: 0.8rem 2.5rem;
+        font-size: 1rem;
+    }
+
+    .image-info {
+        padding: 1.5rem;
+    }
+
+    .image-info h3 {
+        font-size: 1.4rem;
+    }
+
+    .image-info p {
+        font-size: 1rem;
+    }
+
+    .mode-controls {
+        margin: 1rem 0 0;
+        width: 100%;
+    }
+}
+
+.image-container:hover img {
+    filter: brightness(1.05);
+}
+
+/* Image transition effects */
+.image-fade-enter {
+    opacity: 0;
+    transform: scale(1.02);
+}
+
+.image-fade-enter-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.image-fade-exit {
+    opacity: 1;
+    transform: scale(1);
+    position: absolute;
+}
+
+.image-fade-exit-active {
+    opacity: 0;
+    transform: scale(0.98);
+    position: absolute;
+}
+
+.slideshow-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: #ffffff;
+    margin: 0;
+    border-radius: 0;
+}
+
+.slideshow-container.fullscreen .image-container {
+    padding: 0;
+}
+
+.slideshow-container.fullscreen img {
+    max-height: 100vh;
+    padding: 20px;
+}
+
+/* Fullscreen button styles */
+#fullscreen {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+#fullscreen.active {
+    background: linear-gradient(135deg, var(--error-color), var(--accent-color));
+}
+
+/* Adjust controls in fullscreen */
+.slideshow-container.fullscreen .image-info {
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.98));
+}
+
+.slideshow-container.fullscreen .zoom-controls {
+    top: 2rem;
+    right: 2rem;
+}
+
+/* Hide header and controls in fullscreen */
+.fullscreen-active .app-header,
+.fullscreen-active .controls-panel {
+    display: none;
+}
+
+/* Fullscreen controls - only for meeting mode */
+.fullscreen-controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(26, 35, 126, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--primary-color);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+/* Show controls on hover */
+.fullscreen-controls:hover,
+.fullscreen-controls.active {
+    transform: translateY(0);
+}
+
+/* Hover zone for controls */
+.controls-hover-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 9998;
+}
+
+.controls-hover-zone:hover + .fullscreen-controls {
+    transform: translateY(0);
+}
+
+/* Improve button visibility in fullscreen */
+.fullscreen .control-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+.fullscreen .control-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Add pulse animation to fullscreen button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(26, 35, 126, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(26, 35, 126, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(26, 35, 126, 0);
+    }
+}
+
+#fullscreen {
+    animation: pulse 2s infinite;
+}
+
+/* Improve tooltips */
+.tooltip .tooltiptext {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+/* Add hover indicator for controls visibility */
+.controls-indicator {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 15px;
+    border-radius: 0 0 12px 12px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(26, 35, 126, 0.1);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 10001;
+}
+
+.controls-indicator:hover {
+    opacity: 1;
+}
+
+/* Improve fullscreen mode appearance */
+.fullscreen {
+    background: white !important;
+}
+
+.fullscreen .media-container {
+    padding: 20px;
+}
+
+.fullscreen img {
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+    border-radius: 12px;
+}
+
+/* Update split view for home mode */
+#home-content .split-view {
+    display: flex;
+    gap: 1rem;
+    height: calc(100vh - 90px);
+}
+
+#home-content .plan-container {
+    flex: 1;
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+}
+
+#home-content .slideshow-container {
+    flex: 1;
+    position: relative;
+}
+
+/* Meeting mode fullscreen exit button - match home mode position */
+#meeting-content .fullscreen-exit {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 100000 !important;
+    background: #ffffff;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0 !important;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin: 0 !important;
+    width: 48px !important;
+    height: 48px !important;
+    justify-content: center !important;
+}
+
+/* Remove any mode-specific positioning overrides */
+#meeting-content.fullscreen .fullscreen-exit {
+    display: flex !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+
+/* Adjust fullscreen exit button position - remove old override */
+#meeting-content .fullscreen-exit {
+    right: 0 !important;
+    top: 0 !important;
+}
+
+/* Show controls in fullscreen */
+.fullscreen-active .app-header {
+    display: none;
+}
+
+.fullscreen .fullscreen-controls {
+    display: flex;
+}
+
+/* Important: Show controls in fullscreen mode */
+.split-view.fullscreen .fullscreen-controls,
+.slideshow-container.fullscreen .fullscreen-controls {
+    display: flex !important;
+}
+
+/* Style the fullscreen controls */
+.fullscreen-controls .select-wrapper {
+    min-width: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.fullscreen-controls .folder-select.minimal {
+    color: white;
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+
+.fullscreen-controls .control-group {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.25rem;
+    margin: 0;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.fullscreen-controls .control-btn {
+    width: 40px;
+    height: 40px;
+    color: white;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fullscreen-controls .control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Show exit button in fullscreen */
+.split-view.fullscreen .fullscreen-exit,
+.slideshow-container.fullscreen .fullscreen-exit {
+    display: flex !important;
+}
+
+/* Remove loading spinner and info styles */
+.loading-spinner,
+.image-info,
+.schedule-info {
+    display: none;
+}
+
+.folder-select option {
+    padding: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+}
+
+.folder-select option[value="Group1"] {
+    color: #2196F3;
+}
+
+.folder-select option[value="Group2"] {
+    color: #4CAF50;
+}
+
+.folder-select option[value="Group3"] {
+    color: #FF9800;
+}
+
+/* Folder-specific styles */
+.folder-select option[value="News"] {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.folder-select option[value="Birthday_Celebrations"] {
+    background-color: #ea4335;
+    color: white;
+}
+
+.folder-select option[value="Szeibert"] {
+    background-color: #9334e8;
+    color: white;
+}
+
+.folder-select option[value="Szeibert_Mark"] {
+    background-color: #34e8d1;
+    color: black;
+}
+
+.folder-select option[value="Event_Pictures"] {
+    background-color: #e88834;
+    color: white;
+}
+
+/* Folder icons in select */
+.select-wrapper i.folder-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Update select padding for icons */
+.select-wrapper select {
+    padding-left: 3rem;
+}
+
+/* Fullscreen navigation controls */
+.fullscreen-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10001;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.fullscreen-nav .control-btn {
+    pointer-events: auto;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+.fullscreen-nav .control-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.fullscreen-nav .control-btn i {
+    font-size: 1.8rem;
+}
+
+/* Hide tooltips in fullscreen navigation */
+.fullscreen-nav .tooltiptext {
+    display: none;
+}
+
+/* Update fullscreen controls positioning */
+.fullscreen-controls {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10001;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(8px);
+    display: none;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Show controls in fullscreen */
+.split-view.fullscreen .fullscreen-controls,
+.slideshow-container.fullscreen .fullscreen-controls {
+    display: flex !important;
+}
+
+/* Fullscreen navigation controls - Meeting Mode Only */
+#meeting-content .fullscreen-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 10001;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+#meeting-content .fullscreen-nav .control-btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#meeting-content .fullscreen-nav .prev-btn {
+    left: 0;
+}
+
+#meeting-content .fullscreen-nav .next-btn {
+    right: 0;
+}
+
+#meeting-content .fullscreen-nav .control-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    width: 60px;
+}
+
+#meeting-content .fullscreen-nav .control-btn i {
+    font-size: 1.5rem;
+}
+
+/* Update fullscreen controls positioning for meeting mode */
+#meeting-content .fullscreen-controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10001;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 10px 20px;
+    display: none;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+/* Control group in fullscreen */
+#meeting-content .fullscreen-controls .control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+/* Navigation buttons in fullscreen */
+#meeting-content .fullscreen-controls .control-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#meeting-content .fullscreen-controls .control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#meeting-content .fullscreen-controls .control-btn i {
+    font-size: 1.2rem;
+}
+
+/* Select dropdowns in fullscreen */
+#meeting-content .fullscreen-controls .select-wrapper {
+    min-width: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin: 0;
+}
+
+#meeting-content .fullscreen-controls .folder-select.minimal {
+    color: white;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 8px 30px 8px 35px;
+}
+
+/* Show controls in fullscreen */
+#meeting-content.fullscreen .fullscreen-controls,
+#meeting-content .slideshow-container.fullscreen .fullscreen-controls {
+    display: flex !important;
+}
+
+/* Remove old navigation styles */
+#meeting-content .fullscreen-nav {
+    display: none !important;
+}
+
+/* Zoom controls in fullscreen */
+#meeting-content .fullscreen-controls .zoom-controls {
+    display: flex;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+/* Regular meeting mode - nav bar always visible */
+#meeting-content .app-header {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Fullscreen meeting mode - nav bar behavior */
+.fullscreen-active .app-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100000;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+#meeting-content.fullscreen .app-header {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Show nav bar on hover in fullscreen */
+#meeting-content.fullscreen .hover-zone:hover ~ .app-header,
+#meeting-content.fullscreen .app-header:hover {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+/* Hide mode buttons in fullscreen meeting mode */
+#meeting-content.fullscreen .mode-controls {
+    display: none !important;
+}
+
+/* Adjust nav controls layout when mode buttons are hidden */
+#meeting-content.fullscreen .main-nav {
+    justify-content: center;
+    width: 100%;
+}
+
+/* Hover zone for fullscreen meeting mode */
+#meeting-content.fullscreen .hover-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 99999;
+}
+
+/* Adjust the nav controls for fullscreen meeting mode */
+#meeting-content.fullscreen .nav-controls {
+    background: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Remove fullscreen transition delay */
+.fullscreen-active .app-header {
+    transition-delay: 0s !important;
+}
+
+/* Ensure controls are visible in fullscreen */
+.fullscreen-active .nav-controls {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure the header stays on top */
+.app-header {
+    z-index: 100000;
+}
+
+/* Adjust the nav controls for fullscreen meeting mode */
+#meeting-content.fullscreen .nav-controls {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin: 0.5rem;
+}
+
+#numbers-image {
+    transition: opacity 0.3s ease-in-out;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.numbers-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add subtle hover effects */
+.numbers-container:hover,
+.plan-container:hover,
+.slideshow-container:hover {
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Update transitions */
+.mode-content {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Add border radius to images */
+#numbers-image,
+#plan-image,
+#current-image,
+#meeting-current-image {
+    border-radius: 8px;
+}
+
+/* Update folder select options */
+.folder-select option {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Add subtle transitions */
+.numbers-container,
+.plan-container,
+.slideshow-container,
+.control-btn,
+.mode-btn {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Clean up mobile view */
+@media (max-width: 768px) {
+    .app-container {
+        border-width: 1px;
+    }
+    
+    .split-view {
+        padding: 0.5rem;
+    }
+    
+    .numbers-container,
+    .plan-container,
+    .slideshow-container {
+        border-width: 1px;
+    }
+}
+
+/* Add gradient accents */
+.app-header {
+    background: linear-gradient(to right, #ffffff, #f8f9ff);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Enhance images */
+.numbers-container img,
+.plan-container img,
+.media-container img {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.numbers-container img:hover,
+.plan-container img:hover,
+.media-container img:hover {
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+    transform: scale(1.02);
+}
+
+/* Add cool loading animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #f6f7f8 4%, #edeef1 25%, #f6f7f8 36%);
+    background-size: 1000px 100%;
+}
+
+/* Add cool transition effects */
+.mode-content.active {
+    animation: fadeScale 0.3s ease-out;
+}
+
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Enhance control groups */
+.control-group {
+    background-color: rgba(26, 35, 126, 0.03);
+    border: 2px solid var(--primary-color);
+    border-radius: 14px;
+    padding: 8px;
+    gap: 8px;
+}
+
+/* Add subtle hover effect to the app container */
+.app-container {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s ease;
+}
+
+.app-container:hover {
+    box-shadow: 0 12px 32px rgba(26, 35, 126, 0.15);
+}
+
+/* Improve fullscreen exit button */
+.fullscreen-exit {
+    border: 2px solid var(--primary-color) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.fullscreen-exit:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 16px rgba(26, 35, 126, 0.25) !important;
+}
+
+/* Add subtle grid background */
+.main-content {
+    background-image: linear-gradient(rgba(26, 35, 126, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(26, 35, 126, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: #ffffff;
+}
+
+/* Process Confirmation Checklist Styles */
+.process-checklist {
+    width: 100%;
+    overflow-y: visible;
+    max-height: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.checklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.checklist-table th {
+    background-color: #f0f0f0;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.checklist-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.checklist-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.status-cell {
+    width: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.status-cell.green {
+    color: #00cc00;
+}
+
+.status-cell.red {
+    color: #ff0000;
+}
+
+/* Fullscreen adjustments for checklist */
+.kpi-card.fullscreen .process-checklist {
+    max-height: none;
+    overflow-y: visible;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-card.fullscreen .checklist-table {
+    font-size: 24px;
+}
+
+.kpi-card.fullscreen .checklist-table th {
+    padding: 15px;
+}
+
+.kpi-card.fullscreen .checklist-table td {
+    padding: 15px;
+}
+
+.kpi-card.fullscreen .status-cell {
+    width: 60px;
+    font-size: 28px;
+}
+
+/* Make the Process KPI card take full height */
+.grid-column:last-child .kpi-card:first-child {
+    height: calc(100% - 40px); /* Adjust for category header */
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-column:last-child .kpi-card:first-child .kpi-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Add styles for KPI image container */
+.kpi-image-container {
+    width: 100%;
+    height: 100%; /* Fill entire card */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.kpi-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Hide all text elements */
+.kpi-title, 
+.kpi-number,
+.kpi-indicator {
+    display: block !important; /* Change from 'none' to 'block' */
+}
+
+/* Exception for process checklist */
+.grid-column:last-child .kpi-card:first-child .kpi-title,
+.grid-column:last-child .kpi-card:first-child .kpi-number,
+.grid-column:last-child .kpi-card:first-child .kpi-indicator {
+    display: block !important;
+}
+
+.grid-column:last-child .kpi-card:first-child .kpi-image-container {
+    display: none !important;
+}
+
+/* Fullscreen mode */
+.kpi-card.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kpi-card.fullscreen .kpi-image-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.kpi-card.fullscreen .kpi-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+}
+
+/* Process checklist in fullscreen */
+.kpi-card.fullscreen.process-card .process-checklist {
+    display: block !important;
+    position: relative;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Loading indicator */
+.loading-indicator {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s ease-in-out infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Error message styling */
+.image-error {
+    color: #e74c3c;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.image-path {
+    color: #7f8c8d;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    word-break: break-all;
+}
+
+/* Settings Menu Styles */
+.dashboard-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-menu-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 100;
+}
+
+.settings-toggle {
+    background-color: #0d3c5c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.settings-toggle:hover {
+    background-color: #092e46;
+    transform: rotate(30deg);
+}
+
+.settings-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 280px;
+    padding: 15px;
+    display: none;
+    z-index: 1000;
+}
+
+.settings-dropdown.active,
+.settings-dropdown.show {
+    display: block !important;
+    animation: fadeIn 0.3s ease;
+}
+
+.settings-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.settings-section h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.settings-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.settings-btn:hover {
+    background-color: #e9ecef;
+}
+
+.settings-btn:last-child {
+    margin-bottom: 0;
+}
+
+.settings-btn i {
+    margin-right: 8px;
+    width: 16px;
+    text-align: center;
+}
+
+/* Theme Toggle Switch */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin: 0 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2c3e50;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2c3e50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+}
+
+body.dark-theme .performance-dashboard {
+    background-color: #2c2c2c;
+}
+
+body.dark-theme .dashboard-header {
+    background-color: #333;
+}
+
+body.dark-theme .category-header {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-theme .kpi-card {
+    background-color: #3a3a3a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .kpi-title {
+    color: #ddd;
+}
+
+body.dark-theme .kpi-number {
+    color: #fff;
+}
+
+body.dark-theme .settings-dropdown {
+    background-color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .settings-section {
+    border-bottom-color: #444;
+}
+
+body.dark-theme .settings-section h3 {
+    color: #ddd;
+}
+
+body.dark-theme .settings-btn {
+    background-color: #444;
+    border-color: #555;
+    color: #ddd;
+}
+
+body.dark-theme .settings-btn:hover {
+    background-color: #555;
+}
+
+body.dark-theme .process-checklist {
+    background-color: #333;
+}
+
+body.dark-theme .checklist-table th {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-theme .checklist-table td {
+    border-bottom-color: #444;
+    color: #ddd;
+}
+
+body.dark-theme .checklist-table tr:nth-child(even) {
+    background-color: #3a3a3a;
+}
+
+/* Drag and Drop Styles */
+.kpi-card.draggable {
+    cursor: move;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.kpi-card.dragging {
+    opacity: 0.8;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.grid-column.drag-enabled {
+    min-height: 200px;
+    border: 2px dashed #ccc;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.grid-column.drag-enabled.drag-over {
+    background-color: rgba(52, 152, 219, 0.1);
+    border-color: #021f32;
+}
+
+body.drag-mode .kpi-card {
+    margin-bottom: 15px;
+}
+
+body.drag-mode .kpi-card::before {
+    content: "⋮⋮";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+    color: #999;
+    cursor: move;
+    z-index: 10;
+}
+
+/* Print Styles */
+@media print {
+    .settings-menu-container,
+    .settings-toggle,
+    .settings-dropdown {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white;
+    }
+    
+    .performance-dashboard {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .dashboard-grid {
+        display: block;
+    }
+    
+    .grid-column {
+        width: 100%;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+    
+    .kpi-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+}
+
+/* Hide image controls on KPI cards */
+.image-controls {
+    display: none !important; /* Hide the image controls that appear on hover */
+}
+
+.kpi-image-container:hover .image-controls {
+    display: none !important;
+}
+
+.image-nav-btn {
+    display: none !important;
+}
+
+.kpi-card.fullscreen .image-controls {
+    display: none !important;
+}
+
+.kpi-card.fullscreen .image-nav-btn {
+    display: none !important;
+}
+
+/* Keep the file browser styles */
+.file-browser-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* File Browser Modal */
+.file-browser-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 900px;
+    height: 80%;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.file-browser-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.file-browser-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.file-browser-close {
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.file-browser-close:hover {
+    color: #333;
+}
+
+.file-browser-path {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-browser-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.file-item:hover {
+    background-color: #f0f0f0;
+}
+
+.file-item i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.file-item.directory i {
+    color: #ffc107;
+}
+
+.file-item.file i {
+    color: #2196f3;
+}
+
+.file-item.file.supported i {
+    color: #4caf50;
+}
+
+.file-browser-error {
+    color: #e74c3c;
+    padding: 20px;
+    text-align: center;
+}
+
+.no-items {
+    color: #999;
+    padding: 20px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Dark theme for file browser */
+body.dark-theme .file-browser-content {
+    background-color: #333;
+    color: #ddd;
+}
+
+body.dark-theme .file-browser-header {
+    border-bottom-color: #444;
+}
+
+body.dark-theme .file-browser-header h2 {
+    color: #fff;
+}
+
+body.dark-theme .file-browser-close {
+    color: #ccc;
+}
+
+body.dark-theme .file-browser-close:hover {
+    color: #fff;
+}
+
+body.dark-theme .file-browser-path {
+    background-color: #222;
+    border-bottom-color: #444;
+    color: #ddd;
+}
+
+body.dark-theme .file-item:hover {
+    background-color: #444;
+}
+
+body.dark-theme .file-browser-error {
+    color: #e74c3c;
+}
+
+body.dark-theme .no-items {
+    color: #777;
+}
+
+/* KPI Modal Styles */
+.kpi-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.kpi-modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.kpi-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.kpi-modal-close:hover {
+    color: #333;
+}
+
+.kpi-modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.kpi-modal-btn {
+    background-color: #0d3c5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.kpi-modal-btn:hover {
+    background-color: #092e46;
+}
+
+/* Dark theme for modal */
+body.dark-theme .kpi-modal-content {
+    background-color: #333;
+    color: #ddd;
+}
+
+body.dark-theme .kpi-modal h2 {
+    color: #fff;
+}
+
+body.dark-theme .form-group label {
+    color: #ccc;
+}
+
+body.dark-theme .form-group input,
+body.dark-theme .form-group select {
+    background-color: #444;
+    border-color: #555;
+    color: #ddd;
+}
+
+body.dark-theme .kpi-modal-close {
+    color: #ccc;
+}
+
+body.dark-theme .kpi-modal-close:hover {
+    color: #fff;
+}
+
+/* Remove Window Mode */
+body.remove-window-mode .kpi-card {
+    position: relative;
+}
+
+.kpi-delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(231, 76, 60, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+}
+
+.kpi-delete-btn:hover {
+    background-color: rgba(231, 76, 60, 1);
+}
+
+/* Ensure process checklist is fully visible */
+.process-checklist {
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
+.checklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.checklist-table th,
+.checklist-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.checklist-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.checklist-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.checklist-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Current KPI indicator in file browser */
+.current-kpi-indicator {
+    background-color: #f0f8ff;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border-left: 4px solid #3498db;
+    font-weight: bold;
+}
+
+body.dark-theme .current-kpi-indicator {
+    background-color: #1a2733;
+    border-left-color: #3498db;
+}
+
+/* File browser loading indicator */
+.file-browser-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #666;
+}
+
+.file-browser-loading i {
+    margin-right: 10px;
+    animation: spin 1s linear infinite;
+}
+
+body.dark-theme .file-browser-loading {
+    color: #aaa;
+}
+
+/* Selected file indicator */
+.file-item.selected {
+    background-color: #e3f2fd;
+    border-left: 3px solid #2196f3;
+}
+
+body.dark-theme .file-item.selected {
+    background-color: #1c3a4a;
+    border-left-color: #2196f3;
+}
+
+/* File browser footer with actions */
+.file-browser-footer {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.file-browser-btn {
+    background-color: #0d3c5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.file-browser-btn:hover {
+    background-color: #092e46;
+}
+
+.file-browser-btn.cancel {
+    background-color: #6c757d;
+}
+
+.file-browser-btn.cancel:hover {
+    background-color: #5a6268;
+}
+
+body.dark-theme .file-browser-footer {
+    border-top-color: #444;
+}
+
+body.dark-theme .file-browser-btn {
+    background-color: #0d3c5c;
+}
+
+body.dark-theme .file-browser-btn:hover {
+    background-color: #0e4b76;
+}
+
+/* Breadcrumb navigation in file browser */
+.file-browser-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    color: #0d3c5c;
+}
+
+.breadcrumb-item:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #999;
+}
+
+.breadcrumb-item.current {
+    color: #666;
+    font-weight: bold;
+    cursor: default;
+}
+
+.breadcrumb-item.current:hover {
+    text-decoration: none;
+}
+
+body.dark-theme .file-browser-breadcrumb {
+    background-color: #222;
+    border-bottom-color: #444;
+}
+
+body.dark-theme .breadcrumb-item {
+    color: #4da6ff;
+}
+
+body.dark-theme .breadcrumb-separator {
+    color: #777;
+}
+
+body.dark-theme .breadcrumb-item.current {
+    color: #bbb;
+}
+
+/* Active KPI card indicator */
+.kpi-card.active-card {
+    box-shadow: 0 0 0 2px #3498db;
+}
+
+body.dark-theme .kpi-card.active-card {
+    box-shadow: 0 0 0 2px #3498db;
+}
+
+/* File Source Tabs */
+.file-source-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.source-tab {
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.source-tab:hover {
+    background-color: #e9e9e9;
+}
+
+.source-tab.active {
+    border-bottom-color: #0d3c5c;
+    background-color: #fff;
+}
+
+.source-content {
+    display: none;
+    flex: 1;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.source-content.active {
+    display: flex;
+}
+
+/* Local File Upload */
+.local-file-upload {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 15px;
+    overflow: auto;
+}
+
+.upload-zone {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.upload-zone:hover, .upload-zone.drag-over {
+    border-color: #0d3c5c;
+    background-color: rgba(13, 60, 92, 0.05);
+}
+
+.upload-zone i {
+    font-size: 48px;
+    color: #999;
+    margin-bottom: 15px;
+}
+
+.upload-zone p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    display: inline-block;
+    background-color: #0d3c5c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.file-input-label:hover {
+    background-color: #092e46;
+}
+
+.selected-files {
+    margin-top: 20px;
+}
+
+.selected-files h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.selected-files-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.selected-file-item {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.selected-file-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.selected-file-item.selected {
+    box-shadow: 0 0 0 3px #0d3c5c;
+}
+
+.selected-file-thumbnail {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.selected-file-name {
+    padding: 5px;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.selected-file-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #e74c3c;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.selected-file-item:hover .selected-file-remove {
+    opacity: 1;
+}
+
+/* Favorites and Recent Files */
+.favorites-container, .recent-container {
+    flex: 1;
+    padding: 15px;
+    overflow: auto;
+}
+
+.favorites-list, .recent-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.favorite-item, .recent-item {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.favorite-item:hover, .recent-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-item.selected, .recent-item.selected {
+    box-shadow: 0 0 0 3px #0d3c5c;
+}
+
+.favorite-thumbnail, .recent-thumbnail {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.favorite-name, .recent-name {
+    padding: 5px;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.favorite-star {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #f39c12;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.no-favorites, .no-recent {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: #999;
+}
+
+.no-favorites i, .no-recent i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.no-favorites p, .no-recent p {
+    margin: 5px 0;
+}
+
+/* Network Drive Thumbnails */
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.file-item.file.supported {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    height: 140px;
+    margin: 10px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.file-item.file.supported:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: transparent;
+}
+
+.file-item.file.supported.selected {
+    box-shadow: 0 0 0 3px #0d3c5c;
+}
+
+.file-thumbnail {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.file-item.file.supported i {
+    display: none;
+}
+
+.file-item.file.supported span {
+    padding: 5px;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+}
+
+.file-favorite {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ccc;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.file-item.file.supported:hover .file-favorite {
+    opacity: 1;
+}
+
+.file-favorite.active {
+    color: #f39c12;
+    opacity: 1;
+}
+
+.file-browser-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 10px;
+}
+
+/* Improved Tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Card Focus Indicator */
+.kpi-card.active-card {
+    box-shadow: 0 0 0 3px #3498db, 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+/* Confirmation Dialog */
+.confirmation-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.confirmation-content h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.confirmation-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.confirm-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.confirm-btn.cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+.confirm-btn.ok {
+    background-color: #0d3c5c;
+    color: white;
+}
+
+.confirm-btn:hover {
+    opacity: 0.9;
+}
+
+/* Dark Theme Styles */
+body.dark-theme .file-source-tabs {
+    background-color: #222;
+    border-bottom-color: #444;
+}
+
+body.dark-theme .source-tab {
+    color: #ddd;
+}
+
+body.dark-theme .source-tab:hover {
+    background-color: #333;
+}
+
+body.dark-theme .source-tab.active {
+    background-color: #333;
+}
+
+body.dark-theme .upload-zone {
+    border-color: #555;
+}
+
+body.dark-theme .upload-zone:hover, 
+body.dark-theme .upload-zone.drag-over {
+    border-color: #4da6ff;
+    background-color: rgba(77, 166, 255, 0.05);
+}
+
+body.dark-theme .upload-zone i,
+body.dark-theme .upload-zone p {
+    color: #aaa;
+}
+
+body.dark-theme .selected-files h3 {
+    color: #ddd;
+}
+
+body.dark-theme .selected-file-name,
+body.dark-theme .favorite-name,
+body.dark-theme .recent-name {
+    background-color: rgba(51, 51, 51, 0.9);
+    color: #ddd;
+}
+
+body.dark-theme .selected-file-remove,
+body.dark-theme .file-favorite {
+    background-color: rgba(51, 51, 51, 0.8);
+}
+
+body.dark-theme .no-favorites,
+body.dark-theme .no-recent {
+    color: #777;
+}
+
+body.dark-theme .file-item.file.supported span {
+    background-color: rgba(51, 51, 51, 0.9);
+    color: #ddd;
+}
+
+body.dark-theme .confirmation-content {
+    background-color: #333;
+    color: #ddd;
+}
+
+body.dark-theme .confirmation-content h3 {
+    color: #fff;
+}
+
+body.dark-theme .tooltip .tooltiptext {
+    background-color: #222;
+}
+
+body.dark-theme .tooltip .tooltiptext::after {
+    border-color: #222 transparent transparent transparent;
+}
+
+/* Keyboard Shortcut Indicator */
+.shortcut-key {
+    display: inline-block;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin: 0 2px;
+    font-size: 11px;
+    color: #666;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .shortcut-key {
+    background-color: #444;
+    border-color: #555;
+    color: #ddd;
+}
+
+/* Add shortcut indicators to settings menu buttons */
+.settings-btn .shortcut-key {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* Keyboard focus styles */
+.settings-btn:focus,
+.source-tab:focus,
+.file-browser-btn:focus,
+.confirm-btn:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+body.dark-theme .settings-btn:focus,
+body.dark-theme .source-tab:focus,
+body.dark-theme .file-browser-btn:focus,
+body.dark-theme .confirm-btn:focus {
+    outline-color: #4da6ff;
+}
+
+/* Ensure the file browser modal displays properly */
+.file-browser-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-browser-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 900px;
+    height: 80%;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure the network drive content takes full height */
+#networkDriveContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+#networkDriveContent .file-browser-items {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Ensure the file browser items container scrolls properly */
+.file-browser-items {
+    overflow-y: auto;
+}
+
+.image-controls {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.kpi-image-container:hover .image-controls {
+    display: flex;
+    opacity: 1;
+}
+
+.image-nav-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.image-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.kpi-card.fullscreen .image-controls {
+    display: flex;
+    bottom: 20px;
+    opacity: 0;
+}
+
+.kpi-card.fullscreen:hover .image-controls {
+    opacity: 1;
+}
+
+.kpi-card.fullscreen .image-nav-btn {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin: 0 8px;
+    font-size: 1.2em;
+}
+
+.image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 100px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+
+.image-placeholder i {
+    font-size: 2rem;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.image-placeholder p {
+    color: #999;
+    margin: 0;
+}
+
+body.dark-theme .image-placeholder {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .image-placeholder i,
+body.dark-theme .image-placeholder p {
+    color: #555;
+}
+
+/* Notification System */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 350px;
+}
+
+.notification {
+    background-color: white;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 350px;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification-icon {
+    margin-right: 12px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.notification-message {
+    font-size: 14px;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.notification-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.notification-close:hover {
+    color: #333;
+}
+
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: #4CAF50;
+    width: 100%;
+    transform-origin: left;
+}
+
+.notification.success .notification-icon {
+    color: #4CAF50;
+}
+
+.notification.success .notification-progress {
+    background-color: #4CAF50;
+}
+
+.notification.error .notification-icon {
+    color: #F44336;
+}
+
+.notification.error .notification-progress {
+    background-color: #F44336;
+}
+
+.notification.info .notification-icon {
+    color: #2196F3;
+}
+
+.notification.info .notification-progress {
+    background-color: #2196F3;
+}
+
+.notification.warning .notification-icon {
+    color: #FF9800;
+}
+
+.notification.warning .notification-progress {
+    background-color: #FF9800;
+}
+
+/* Dark theme support */
+body.dark-theme .notification {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+body.dark-theme .notification-close {
+    color: #bdc3c7;
+}
+
+body.dark-theme .notification-close:hover {
+    color: #ecf0f1;
+}
+
+/* Image update effect */
+.kpi-card.image-updated {
+    animation: flash-update 1s ease;
+}
+
+@keyframes flash-update {
+    0% { box-shadow: 0 0 0 rgba(33, 150, 243, 0); }
+    20% { box-shadow: 0 0 15px rgba(33, 150, 243, 0.7); }
+    100% { box-shadow: 0 0 0 rgba(33, 150, 243, 0); }
+}
+
+/* Dark theme support */
+body.dark-theme .kpi-card.image-updated {
+    animation: flash-update-dark 1s ease;
+}
+
+@keyframes flash-update-dark {
+    0% { box-shadow: 0 0 0 rgba(66, 165, 245, 0); }
+    20% { box-shadow: 0 0 15px rgba(66, 165, 245, 0.7); }
+    100% { box-shadow: 0 0 0 rgba(66, 165, 245, 0); }
+}
+
+/* Remove refresh indicator styles */
+#refresh-indicator {
+    display: none;
+}
+
+/* Modify image update animation to be subtle */
+.kpi-card.image-updated {
+    animation: subtle-update 0.5s ease-in-out;
+}
+
+@keyframes subtle-update {
+    0% { opacity: 1; }
+    50% { opacity: 0.95; }
+    100% { opacity: 1; }
+}
+
+body.dark-theme .kpi-card.image-updated {
+    animation: subtle-update-dark 0.5s ease-in-out;
+}
+
+@keyframes subtle-update-dark {
+    0% { opacity: 1; }
+    50% { opacity: 0.95; }
+    100% { opacity: 1; }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Meeting Mode Styles */
+.meeting-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.meeting-mode.active {
+    display: flex;
+}
+
+/* Header area with title and exit button */
+.meeting-mode-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+}
+
+/* Title styling */
+.meeting-mode-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    flex: 1;
+}
+
+/* Exit button */
+.meeting-mode-exit {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.meeting-mode-exit:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Content area */
+.meeting-mode-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 120px);
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image styling */
+.meeting-mode-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    /* Remove transform property that was used for zoom */
+}
+
+/* Controls bar */
+.meeting-mode-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Control buttons */
+.meeting-mode-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.meeting-mode-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.meeting-mode-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.meeting-mode-btn.exit {
+    background-color: rgba(255, 77, 77, 0.7);
+}
+
+.meeting-mode-btn.exit:hover {
+    background-color: rgba(255, 77, 77, 0.9);
+}
+
+/* Zoom button styling */
+.meeting-mode-btn.zoom-in {
+    background-color: rgba(76, 175, 80, 0.7);
+}
+
+.meeting-mode-btn.zoom-in:hover {
+    background-color: rgba(76, 175, 80, 0.9);
+}
+
+.meeting-mode-btn.zoom-out {
+    background-color: rgba(255, 152, 0, 0.7);
+}
+
+.meeting-mode-btn.zoom-out:hover {
+    background-color: rgba(255, 152, 0, 0.9);
+}
+
+/* Slide counter */
+.meeting-mode-slide-counter {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 20px;
+    min-width: 60px;
+    text-align: center;
+    user-select: none;
+}
+
+/* Extra content selector */
+.extra-content-selector {
+    display: none;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.extra-content-header {
+    margin-bottom: 20px;
+}
+
+.extra-content-header h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.extra-content-header p {
+    font-size: 16px;
+    color: #555;
+}
+
+.extra-content-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.extra-content-dropdown {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.extra-content-btn {
+    padding: 10px 15px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.extra-content-btn:hover {
+    background-color: #0052a3;
+}
+
+.extra-content-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.extra-content-preview {
+    margin: 20px 0;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.extra-content-preview img {
+    max-width: 100%;
+    height: auto;
+}
+
+.extra-content-controls {
+    display: flex;
+    justify-content: flex-end;
+}

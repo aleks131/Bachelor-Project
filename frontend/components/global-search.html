@@ -1,0 +1,21 @@
+<!-- Global Search Component -->
+<div class="global-search-container">
+    <div style="position: relative;">
+        <i class="fas fa-search global-search-icon"></i>
+        <input 
+            type="text" 
+            id="global-search" 
+            class="global-search-input" 
+            placeholder="Search files, images, folders..."
+            autocomplete="off"
+        >
+    </div>
+</div>
+
+<link rel="stylesheet" href="/styles/search.css">
+<script src="/scripts/search-system.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        searchSystem.initialize();
+    });
+</script>

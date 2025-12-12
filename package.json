@@ -1,0 +1,35 @@
+{
+  "name": "smart-solutions-triplea",
+  "version": "2.0.0",
+  "description": "Enterprise-grade unified application platform for managing daily operations, image galleries, and performance dashboards",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "create-test-images": "node backend/utils/create-test-media-sharp.js",
+    "init-test-data": "node backend/init-test-data.js"
+  },
+  "keywords": [
+    "enterprise",
+    "dashboard",
+    "image-gallery",
+    "kpi",
+    "performance",
+    "nodejs",
+    "express"
+  ],
+  "author": "TripleA",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "canvas": "^3.1.0",
+    "chokidar": "^3.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^1.4.5-lts.1",
+    "sharp": "^0.33.5",
+    "tesseract.js": "^6.0.1",
+    "ws": "^8.16.0"
+  }
+}

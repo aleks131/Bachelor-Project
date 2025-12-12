@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Smart Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="styles/premium-theme.css">
+    <link rel="stylesheet" href="styles/premium-ui.css">
+    <link rel="stylesheet" href="styles/dark-theme.css">
+    <link rel="stylesheet" href="styles/toast-notifications.css">
+    <link rel="stylesheet" href="styles/analytics-dashboard.css">
+    <link rel="stylesheet" href="styles/admin-settings.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <div class="header-content">
+                <img src="assets/salling.png" alt="TripleA Logo" class="logo">
+                <h1>Admin Panel - Smart Solutions</h1>
+                <div class="header-actions">
+                    <button id="back-to-dashboard" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </button>
+                    <button id="logout-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <nav class="admin-nav">
+                <button class="nav-btn active" data-section="users">
+                    <i class="fas fa-users"></i> Users
+                </button>
+                <button class="nav-btn" data-section="paths">
+                    <i class="fas fa-folder-open"></i> Network Paths
+                </button>
+                <button class="nav-btn" data-section="layouts">
+                    <i class="fas fa-th"></i> Layouts
+                </button>
+                <a href="/admin/layout-builder" class="nav-btn" style="background: var(--accent-color); color: white; text-decoration: none;">
+                    <i class="fas fa-paint-brush"></i> Layout Builder
+                </a>
+                <button class="nav-btn" data-section="analytics">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </button>
+                <button class="nav-btn" data-section="config">
+                    <i class="fas fa-cog"></i> Configuration
+                </button>
+                <button class="nav-btn" data-section="backup">
+                    <i class="fas fa-database"></i> Backup & Restore
+                </button>
+                <button class="nav-btn" data-section="system">
+                    <i class="fas fa-tools"></i> System Tools
+                </button>
+                <a href="/monitoring" class="nav-btn" style="background: #e74c3c; color: white; text-decoration: none;">
+                    <i class="fas fa-heartbeat"></i> Monitoring
+                </a>
+            </nav>
+
+            <div class="admin-content">
+                <!-- Users Section -->
+                <section id="users-section" class="content-section active">
+                    <div class="section-header">
+                        <h2>User Management</h2>
+                        <button id="add-user-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add User
+                        </button>
+                    </div>
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Allowed Apps</th>
+                                    <th>Network Paths</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-tbody">
+                                <tr>
+                                    <td colspan="6" class="loading">Loading users...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Network Paths Section -->
+                <section id="paths-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Network Path Configuration</h2>
+                        <p class="section-description">Configure network paths for each user. Click on a user to edit their paths.</p>
+                    </div>
+                    <div id="paths-content">
+                        <p class="info-message">Select a user from the Users section to configure their network paths.</p>
+                    </div>
+                </section>
+
+                <!-- Layouts Section -->
+                <section id="layouts-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Saved Layouts</h2>
+                        <a href="/admin/layout-builder" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create New Layout
+                        </a>
+                    </div>
+                    <div class="layouts-list" id="layouts-list">
+                        <div class="loading">Loading layouts...</div>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics-section" class="content-section">
+                    <div id="analytics-content">
+                        <div class="loading">Loading analytics...</div>
+                    </div>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="config-section" class="content-section">
+                    <div id="admin-settings-content">
+                        <div class="loading">Loading settings...</div>
+                    </div>
+                </section>
+
+                <!-- Backup & Restore Section -->
+                <section id="backup-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Backup & Restore</h2>
+                        <button id="create-backup-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create Backup
+                        </button>
+                    </div>
+                    <div id="backup-content">
+                        <div class="loading">Loading backups...</div>
+                    </div>
+                </section>
+
+                <!-- System Tools Section -->
+                <section id="system-section" class="content-section">
+                    <div class="section-header">
+                        <h2>System Tools</h2>
+                        <button id="run-diagnostics-btn" class="btn btn-primary">
+                            <i class="fas fa-stethoscope"></i> Run Diagnostics
+                        </button>
+                        <button id="health-check-btn" class="btn btn-secondary">
+                            <i class="fas fa-heartbeat"></i> Health Check
+                        </button>
+                    </div>
+                    <div id="system-content">
+                        <div class="info-message">
+                            <i class="fas fa-info-circle"></i>
+                            Use the buttons above to run system diagnostics and health checks.
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- User Modal -->
+        <div id="user-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Add User</h3>
+                    <button class="modal-close" id="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="user-form">
+                        <input type="hidden" id="user-id">
+                        
+                        <div class="form-group">
+                            <label for="username">Username *</label>
+                            <input type="text" id="username" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" class="form-input" required>
+                            <small class="form-help">Leave empty when editing to keep current password</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Role *</label>
+                            <select id="role" class="form-select" required>
+                                <option value="admin">Admin</option>
+                                <option value="manager">Manager</option>
+                                <option value="operator">Operator</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Allowed Applications</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="allowedApps" value="daily-plan">
+                                    Daily Plan Viewer
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="allowedApps" value="gallery">
+                                    Image Gallery
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="allowedApps" value="dashboard">
+                                    Performance Dashboard
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Network Paths</label>
+                            <div class="paths-grid">
+                                <div class="path-item">
+                                    <label for="path-main">Main Path</label>
+                                    <div class="path-input-group">
+                                        <input type="text" id="path-main" class="form-input path-input" placeholder="K:/path/to/images">
+                                        <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="main">
+                                            <i class="fas fa-check"></i> Test
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="path-item">
+                                    <label for="path-daily-plan">Daily Plan Path</label>
+                                    <div class="path-input-group">
+                                        <input type="text" id="path-daily-plan" class="form-input path-input" placeholder="K:/path/to/dailyplan">
+                                        <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="dailyPlan">
+                                            <i class="fas fa-check"></i> Test
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="path-item">
+                                    <label for="path-gallery">Gallery Path</label>
+                                    <div class="path-input-group">
+                                        <input type="text" id="path-gallery" class="form-input path-input" placeholder="K:/path/to/gallery">
+                                        <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="gallery">
+                                            <i class="fas fa-check"></i> Test
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="path-item">
+                                    <label for="path-extra">Extra Content Path</label>
+                                    <div class="path-input-group">
+                                        <input type="text" id="path-extra" class="form-input path-input" placeholder="K:/path/to/extra">
+                                        <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="extra">
+                                            <i class="fas fa-check"></i> Test
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="path-item">
+                                    <label for="path-kpi">KPI Meeting Path</label>
+                                    <div class="path-input-group">
+                                        <input type="text" id="path-kpi" class="form-input path-input" placeholder="K:/path/to/kpi">
+                                        <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="kpi">
+                                            <i class="fas fa-check"></i> Test
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="cancel-user-btn">Cancel</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save User
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+                        <div class="form-group">
+                            <label for="server-port">Server Port</label>
+                            <input type="number" id="server-port" class="form-input" min="1" max="65535">
+                        </div>
+                        <div class="form-group">
+                            <label for="session-secret">Session Secret</label>
+                            <input type="text" id="session-secret" class="form-input">
+                        </div>
+                        <button id="save-config-btn" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Configuration
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Modal -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add User</h3>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="user-form">
+                    <input type="hidden" id="user-id">
+                    
+                    <div class="form-group">
+                        <label for="username">Username *</label>
+                        <input type="text" id="username" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" class="form-input" required>
+                        <small class="form-help">Leave empty when editing to keep current password</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role *</label>
+                        <select id="role" class="form-select" required>
+                            <option value="admin">Admin</option>
+                            <option value="manager">Manager</option>
+                            <option value="operator">Operator</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Allowed Applications</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="allowedApps" value="daily-plan">
+                                Daily Plan Viewer
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="allowedApps" value="gallery">
+                                Image Gallery
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="allowedApps" value="dashboard">
+                                Performance Dashboard
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Network Paths</label>
+                        <div class="paths-grid">
+                            <div class="path-item">
+                                <label for="path-main">Main Path</label>
+                                <div class="path-input-group">
+                                    <input type="text" id="path-main" class="form-input path-input" placeholder="K:/path/to/images">
+                                    <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="main">
+                                        <i class="fas fa-check"></i> Test
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="path-item">
+                                <label for="path-daily-plan">Daily Plan Path</label>
+                                <div class="path-input-group">
+                                    <input type="text" id="path-daily-plan" class="form-input path-input" placeholder="K:/path/to/dailyplan">
+                                    <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="dailyPlan">
+                                        <i class="fas fa-check"></i> Test
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="path-item">
+                                <label for="path-gallery">Gallery Path</label>
+                                <div class="path-input-group">
+                                    <input type="text" id="path-gallery" class="form-input path-input" placeholder="K:/path/to/gallery">
+                                    <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="gallery">
+                                        <i class="fas fa-check"></i> Test
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="path-item">
+                                <label for="path-extra">Extra Content Path</label>
+                                <div class="path-input-group">
+                                    <input type="text" id="path-extra" class="form-input path-input" placeholder="K:/path/to/extra">
+                                    <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="extra">
+                                        <i class="fas fa-check"></i> Test
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="path-item">
+                                <label for="path-kpi">KPI Meeting Path</label>
+                                <div class="path-input-group">
+                                    <input type="text" id="path-kpi" class="form-input path-input" placeholder="K:/path/to/kpi">
+                                    <button type="button" class="btn btn-sm btn-secondary test-path-btn" data-path="kpi">
+                                        <i class="fas fa-check"></i> Test
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancel-user-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save User
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/admin.js"></script>
+    <script src="scripts/admin-settings.js"></script>
+    <script src="scripts/admin-backup.js"></script>
+    <script src="scripts/admin-system.js"></script>
+    <script src="scripts/theme-manager.js"></script>
+    <script src="scripts/notification-system.js"></script>
+    <script src="scripts/toast-notifications.js"></script>
+    <script src="scripts/analytics-dashboard.js"></script>
+</body>
+</html>

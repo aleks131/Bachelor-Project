@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery - Smart Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/app-overrides.css">
+    <link rel="stylesheet" href="../styles/gallery-overrides.css">
+    <link rel="stylesheet" href="../styles/gallery.css">
+    <link rel="stylesheet" href="../styles/smart-image.css">
+    <link rel="stylesheet" href="../styles/advanced-image-viewer.css">
+    <link rel="stylesheet" href="../styles/dark-theme.css">
+    <link rel="stylesheet" href="../styles/file-preview.css">
+    <link rel="stylesheet" href="../styles/context-menu.css">
+    <link rel="stylesheet" href="../styles/toast-notifications.css">
+    <link rel="stylesheet" href="../styles/bulk-operations.css">
+    <link rel="stylesheet" href="../styles/theme-toggle.css">
+    <link rel="stylesheet" href="../styles/ui-fixes.css">
+    <link rel="stylesheet" href="../styles/ui-enhancements.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="../assets/triple-a-logo.svg" alt="TripleA Logo" class="logo">
+            </div>
+            <nav class="main-nav">
+                <div class="mode-controls">
+                    <button id="home-mode" class="mode-btn active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </button>
+                    <button id="meeting-mode" class="mode-btn">
+                        <i class="fas fa-users"></i>
+                        <span>Meeting</span>
+                    </button>
+                </div>
+
+                <div class="nav-controls">
+                    <button id="back-to-dashboard" class="control-btn tooltip" title="Back to Dashboard">
+                        <i class="fas fa-home"></i>
+                    </button>
+                    <div class="select-wrapper tooltip">
+                        <i class="fas fa-folder"></i>
+                        <select id="folder-select" class="folder-select minimal">
+                            <option value="">Select Folder</option>
+                        </select>
+                        <span class="tooltiptext">Select Folder</span>
+                    </div>
+
+                    <div class="select-wrapper tooltip">
+                        <i class="fas fa-image"></i>
+                        <select id="image-select" class="folder-select minimal">
+                            <option value="">Select Image</option>
+                        </select>
+                        <span class="tooltiptext">Select Image</span>
+                    </div>
+
+                    <div class="control-group">
+                        <button id="prev-image" class="control-btn tooltip">
+                            <i class="fas fa-chevron-left"></i>
+                            <span class="tooltiptext">Previous</span>
+                        </button>
+                        <button id="play-pause" class="control-btn tooltip">
+                            <i class="fas fa-pause"></i>
+                            <span class="tooltiptext">Pause</span>
+                        </button>
+                        <button id="next-image" class="control-btn tooltip">
+                            <i class="fas fa-chevron-right"></i>
+                            <span class="tooltiptext">Next</span>
+                        </button>
+                        <button id="restart" class="control-btn tooltip">
+                            <i class="fas fa-redo"></i>
+                            <span class="tooltiptext">Start</span>
+                        </button>
+                    </div>
+
+                    <div class="control-group">
+                        <button id="zoom-in" class="control-btn tooltip">
+                            <i class="fas fa-search-plus"></i>
+                            <span class="tooltiptext">Zoom In</span>
+                        </button>
+                        <button id="zoom-out" class="control-btn tooltip">
+                            <i class="fas fa-search-minus"></i>
+                            <span class="tooltiptext">Zoom Out</span>
+                        </button>
+                        <button id="fullscreen" class="control-btn tooltip">
+                            <i class="fas fa-expand"></i>
+                            <span class="tooltiptext">Fullscreen</span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <div class="content-container">
+                <div id="home-content" class="mode-content active">
+                    <div class="split-view">
+                        <button class="fullscreen-exit tooltip">
+                            <i class="fas fa-compress"></i>
+                            <span class="tooltiptext">Exit Fullscreen</span>
+                        </button>
+                        <div class="left-section">
+                            <div class="numbers-container">
+                                <img id="numbers-image" src="" alt="Numbers Image">
+                            </div>
+                            <div class="plan-container">
+                                <img id="plan-image" src="" alt="Plan Image">
+                            </div>
+                        </div>
+                        <div class="slideshow-container">
+                            <div class="media-container">
+                                <img id="current-image" src="" alt="Slideshow Image" style="display: none;">
+                                <video id="current-video" controls style="display: none;">
+                                    <source src="" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="meeting-content" class="mode-content">
+                    <div class="hover-zone"></div>
+                    <div class="controls-hover-zone"></div>
+                    <div class="controls-indicator">Hover here for controls</div>
+                    <div class="fullscreen-controls">
+                        <div class="control-group">
+                            <button id="meeting-prev-image" class="control-btn tooltip">
+                                <i class="fas fa-chevron-left"></i>
+                                <span class="tooltiptext">Previous</span>
+                            </button>
+                            <button id="meeting-play-pause" class="control-btn tooltip">
+                                <i class="fas fa-pause"></i>
+                                <span class="tooltiptext">Pause</span>
+                            </button>
+                            <button id="meeting-next-image" class="control-btn tooltip">
+                                <i class="fas fa-chevron-right"></i>
+                                <span class="tooltiptext">Next</span>
+                            </button>
+                        </div>
+                        <div class="control-group">
+                            <button id="meeting-zoom-in" class="control-btn tooltip">
+                                <i class="fas fa-search-plus"></i>
+                                <span class="tooltiptext">Zoom In</span>
+                            </button>
+                            <button id="meeting-zoom-out" class="control-btn tooltip">
+                                <i class="fas fa-search-minus"></i>
+                                <span class="tooltiptext">Zoom Out</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="fullscreen-exit tooltip">
+                        <i class="fas fa-compress"></i>
+                        <span class="tooltiptext">Exit Fullscreen</span>
+                    </button>
+                    <div class="slideshow-container">
+                        <div class="media-container">
+                            <img id="meeting-current-image" src="" alt="Slideshow Image" style="display: none;">
+                            <video id="meeting-current-video" controls style="display: none;">
+                                <source src="" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/schedule-manager-gallery.js"></script>
+    <script src="../scripts/smart-image.js"></script>
+    <script src="../scripts/gallery.js"></script>
+    <script src="../scripts/analytics.js"></script>
+    <script src="../scripts/keyboard-shortcuts.js"></script>
+    <script src="../scripts/theme-manager.js"></script>
+    <script src="../scripts/notification-system.js"></script>
+    <script src="../scripts/file-management.js"></script>
+    <script src="../scripts/file-preview.js"></script>
+    <script src="../scripts/context-menu.js"></script>
+    <script src="../scripts/toast-notifications.js"></script>
+    <script src="../scripts/export-system.js"></script>
+    <script src="../scripts/bulk-operations.js"></script>
+    
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+</body>
+</html>

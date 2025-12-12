@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Layout - Salling Unified App</title>
+    <link rel="icon" type="image/png" href="../assets/salling.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/widget-renderer.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #f5f7fa;
+        }
+        .layout-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+        }
+        .layout-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to right, #1a237e, #0d47a1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .layout-header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .layout-content {
+            margin-top: 60px;
+            position: relative;
+            width: 100%;
+            min-height: calc(100vh - 60px);
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-container">
+        <header class="layout-header">
+            <div>
+                <button id="back-btn" style="background: none; border: none; color: white; margin-right: 1rem; cursor: pointer;">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 id="layout-title">Custom Layout</h1>
+            </div>
+            <div>
+                <button id="refresh-btn" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+        </header>
+        <div class="layout-content" id="layout-content" style="position: relative; min-height: calc(100vh - 60px); padding: 20px;">
+            <div class="loading" style="text-align: center; padding: 2rem; color: #666;">
+                <i class="fas fa-spinner fa-spin"></i> Loading layout...
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/widget-renderer.js"></script>
+    <script>
+        let currentLayout = null;
+
+        async function loadLayout() {
+            const params = new URLSearchParams(window.location.search);
+            const layoutId = params.get('layout');
+            
+            if (!layoutId) {
+                document.getElementById('layout-content').innerHTML = 
+                    '<div class="error">No layout ID provided</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/layouts/${layoutId}`);
+                if (!response.ok) throw new Error('Failed to load layout');
+                
+                const data = await response.json();
+                currentLayout = data.layout;
+                
+                document.getElementById('layout-title').textContent = currentLayout.name || 'Custom Layout';
+                await widgetRenderer.renderLayout(currentLayout, document.getElementById('layout-content'));
+            } catch (error) {
+                console.error('Error loading layout:', error);
+                document.getElementById('layout-content').innerHTML = 
+                    '<div class="error">Failed to load layout</div>';
+            }
+        }
+
+        document.getElementById('back-btn').addEventListener('click', () => {
+            window.location.href = '/dashboard';
+        });
+
+        document.getElementById('refresh-btn').addEventListener('click', () => {
+            if (currentLayout) {
+                widgetRenderer.renderLayout(currentLayout, document.getElementById('layout-content'));
+            }
+        });
+
+        loadLayout();
+    </script>
+</body>
+</html>

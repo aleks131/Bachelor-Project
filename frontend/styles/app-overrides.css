@@ -1,0 +1,29 @@
+.header-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.premium-button {
+    padding: 12px 24px;
+    min-width: auto;
+}
+
+.premium-button-secondary {
+    padding: 12px;
+}
+
+.premium-button-danger {
+    padding: 12px;
+}
+
+/* Ensure buttons don't break layout */
+@media (max-width: 768px) {
+    .premium-button span {
+        display: none;
+    }
+    .premium-button {
+        padding: 12px;
+    }
+}
+

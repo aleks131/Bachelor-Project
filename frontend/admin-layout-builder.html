@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Builder - Admin Panel</title>
+    <link rel="icon" type="image/png" href="/assets/salling.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/admin.css">
+    <link rel="stylesheet" href="/styles/layout-builder.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+<body>
+    <div class="layout-builder-container">
+        <header class="builder-header">
+            <div class="header-left">
+                <button id="back-to-admin" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Admin
+                </button>
+                <h1>Layout Builder</h1>
+            </div>
+            <div class="header-actions">
+                <button id="save-layout-btn" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Layout
+                </button>
+                <button id="preview-layout-btn" class="btn btn-secondary">
+                    <i class="fas fa-eye"></i> Preview
+                </button>
+            </div>
+        </header>
+
+        <div class="builder-main">
+            <!-- Widget Palette -->
+            <aside class="widget-palette">
+                <h3>Widgets</h3>
+                <div class="widget-categories">
+                    <div class="category-section">
+                        <h4>Display</h4>
+                        <div class="widget-list" id="display-widgets"></div>
+                    </div>
+                    <div class="category-section">
+                        <h4>Navigation</h4>
+                        <div class="widget-list" id="navigation-widgets"></div>
+                    </div>
+                    <div class="category-section">
+                        <h4>Utility</h4>
+                        <div class="widget-list" id="utility-widgets"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Canvas Area -->
+            <main class="builder-canvas">
+                <div class="canvas-toolbar">
+                    <div class="toolbar-group">
+                        <label>Layout Name:</label>
+                        <input type="text" id="layout-name" class="form-input" placeholder="My Custom Layout">
+                    </div>
+                    <div class="toolbar-group">
+                        <label>Description:</label>
+                        <input type="text" id="layout-description" class="form-input" placeholder="Layout description">
+                    </div>
+                    <div class="toolbar-group">
+                        <label>
+                            <input type="checkbox" id="layout-global"> Global Layout
+                        </label>
+                        <label>
+                            <input type="checkbox" id="layout-template"> Save as Template
+                        </label>
+                    </div>
+                </div>
+
+                <div class="canvas-grid" id="canvas-grid">
+                    <div class="canvas-placeholder">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Drag widgets here to build your layout</p>
+                        <p class="hint">Grid: 12 columns</p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Properties Panel -->
+            <aside class="properties-panel">
+                <h3>Properties</h3>
+                <div id="properties-content">
+                    <p class="no-selection">Select a widget to edit its properties</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Widget Config Modal -->
+    <div id="widget-config-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="config-modal-title">Configure Widget</h3>
+                <button class="modal-close" id="close-config-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="widget-config-form"></form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-config-btn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-config-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Layout Modal -->
+    <div id="save-layout-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Save Layout</h3>
+                <button class="modal-close" id="close-save-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Layout Name *</label>
+                    <input type="text" id="save-layout-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="save-layout-desc" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="save-layout-global"> Make this a global layout (available to all users)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Assign to User (optional)</label>
+                    <select id="save-layout-user" class="form-select">
+                        <option value="">All users</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-save-btn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirm-save-btn">Save Layout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content modal-fullscreen">
+            <div class="modal-header">
+                <h3>Layout Preview</h3>
+                <button class="modal-close" id="close-preview-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="preview-container" class="layout-renderer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/layout-builder.js"></script>
+</body>
+</html>

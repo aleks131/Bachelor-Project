@@ -1,0 +1,138 @@
+.advanced-image-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #f5f5f5;
+}
+
+.viewer-toolbar {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: #f8f9ff;
+    border-radius: 8px;
+}
+
+.toolbar-btn {
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 2px solid var(--builder-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--builder-primary);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar-btn:hover {
+    background: var(--builder-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.zoom-level {
+    font-weight: 600;
+    color: var(--builder-primary);
+    min-width: 60px;
+    text-align: center;
+}
+
+.viewer-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.image-container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2a2a2a;
+    position: relative;
+}
+
+.image-container img {
+    max-width: none;
+    max-height: none;
+    cursor: grab;
+    transition: transform 0.1s ease-out;
+}
+
+.image-container img:active {
+    cursor: grabbing;
+}
+
+.image-info-panel {
+    width: 300px;
+    background: white;
+    border-left: 2px solid #e0e0e0;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.image-info-panel h4 {
+    margin: 0 0 1rem 0;
+    color: var(--builder-primary);
+}
+
+.info-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item strong {
+    display: inline-block;
+    min-width: 120px;
+    color: #666;
+}
+
+.filters-panel {
+    width: 300px;
+    background: white;
+    border-left: 2px solid #e0e0e0;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.filters-panel h4 {
+    margin: 0 0 1rem 0;
+    color: var(--builder-primary);
+}
+
+.filter-control {
+    margin-bottom: 1.5rem;
+}
+
+.filter-control label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.filter-control input[type="range"] {
+    width: 100%;
+}
+
+.filter-control span {
+    display: block;
+    text-align: right;
+    margin-top: 0.25rem;
+    color: var(--builder-primary);
+    font-weight: 600;
+}

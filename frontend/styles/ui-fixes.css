@@ -1,0 +1,100 @@
+/* Global Premium UI Improvements */
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.5);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.8);
+}
+
+/* Dark mode scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Global Transition for Theme Switching */
+body, .premium-card, .dashboard-header, .app-header, .nav-controls, .modal-content, input, select, textarea {
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Enhanced Focus States for Accessibility and UX */
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Button & Interactive Element Hover Fixes */
+button, a {
+    cursor: pointer;
+}
+
+button:disabled, a.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+/* Toast Notification Improvements */
+.toast-notification {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .toast-notification {
+    background: rgba(30, 30, 40, 0.95);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Tooltip Enhancements */
+.tooltip .tooltiptext {
+    background: rgba(26, 29, 41, 0.95);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* Modal Improvements */
+.modal-content {
+    animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPopIn {
+    0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+

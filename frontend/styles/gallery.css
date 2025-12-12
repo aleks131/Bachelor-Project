@@ -1,0 +1,1556 @@
+:root {
+    /* Clean white theme */
+    --primary-color: #1a237e;  /* Dark blue */
+    --secondary-color: #0d47a1; /* Slightly lighter blue */
+    --accent-color: #2962ff;   /* Bright blue */
+    --background-color: #ffffff; /* Pure white background */
+    --text-color: #1a237e;     /* Dark blue text */
+    --success-color: #00c853;
+    --error-color: #d50000;
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+    --card-shadow: 0 4px 8px rgba(26, 35, 126, 0.15);
+    --hover-shadow: 0 6px 12px rgba(26, 35, 126, 0.25);
+    --border-color: #1a237e;   /* Dark blue border */
+}
+
+/* Remove dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #1a237e;
+        --secondary-color: #0d47a1;
+        --accent-color: #2962ff;
+        --background-color: #ffffff;
+        --text-color: #1a237e;
+        --card-bg: #ffffff;
+        --card-shadow: 0 4px 8px rgba(26, 35, 126, 0.15);
+        --hover-shadow: 0 6px 12px rgba(26, 35, 126, 0.25);
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background-color var(--transition-speed);
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1800px;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-speed);
+}
+
+.app-header {
+    background: linear-gradient(to right, #ffffff, #f8f9ff);
+    border-bottom: 2px solid var(--primary-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+}
+
+.app-header:hover {
+    background: #ffffff;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-left: 1rem;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #ffffff;
+    border: 2px solid var(--primary-color);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.1);
+}
+
+.control-group {
+    display: flex;
+    gap: 0.25rem;
+    padding: 5px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.control-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: var(--primary-color);
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+}
+
+.control-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(26, 35, 126, 0.2);
+}
+
+.control-btn i {
+    font-size: 1.2rem;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    border: none;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Mode buttons */
+.mode-controls {
+    display: flex;
+    gap: 0.5rem;
+    background: #ffffff;
+    padding: 0.25rem;
+    border-radius: 12px;
+}
+
+.mode-btn {
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+}
+
+.mode-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Folder select */
+.folder-select.minimal {
+    padding: 0.7rem 2.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.folder-select.minimal option {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    padding: 0.5rem;
+}
+
+.select-wrapper {
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s ease;
+}
+
+.select-wrapper:hover {
+    box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+    transform: translateY(-1px);
+}
+
+.select-wrapper i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Main content adjustments */
+.main-content {
+    margin-top: 70px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+    background-color: #ffffff;
+    background-image: linear-gradient(rgba(26, 35, 126, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(26, 35, 126, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Fullscreen adjustments */
+.fullscreen-active .app-header {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fullscreen-active .app-header:hover {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+        gap: 0.5rem;
+    }
+
+    .nav-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .select-wrapper {
+        min-width: 120px;
+        flex: 1;
+    }
+
+    .control-group {
+        flex: none;
+    }
+
+    .control-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .control-btn i {
+        font-size: 1rem;
+    }
+}
+
+.mode-btn i {
+    font-size: 1.2rem;
+}
+
+.logo-container {
+    width: 180px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.controls-panel {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin: 0 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.folder-controls {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+select {
+    appearance: none;
+    background: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+select:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(41, 98, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(41, 98, 255, 0.2);
+}
+
+.select-wrapper::after {
+    content: '▼';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    pointer-events: none;
+    font-size: 0.8rem;
+}
+
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.mode-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    flex: 1;
+    background-color: #ffffff;
+}
+
+.mode-content.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Split view layout */
+.split-view {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    height: calc(98vh - 80px);
+    min-height: 600px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.left-section {
+    flex: 0.35;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #ffffff;
+}
+
+.numbers-container {
+    flex: 0.3; /* 30% of left section */
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--border-color);
+    padding: 10px;
+}
+
+.plan-container {
+    flex: 0.7; /* 70% of left section */
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+    padding: 10px;
+}
+
+.plan-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.slideshow-container {
+    flex: 0.65;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+}
+
+/* Image styling */
+.numbers-container img,
+.plan-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Fullscreen adjustments */
+.fullscreen .split-view {
+    height: 100vh;
+    padding: 0;
+    gap: 0;
+    background: #ffffff;
+}
+
+.fullscreen .left-section {
+    gap: 0;
+}
+
+.fullscreen .numbers-container,
+.fullscreen .plan-container,
+.fullscreen .slideshow-container {
+    border-radius: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .split-view {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .left-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .numbers-container {
+        height: 30vh;
+    }
+
+    .plan-container {
+        height: 40vh;
+    }
+
+    .slideshow-container {
+        flex: none;
+        height: 50vh;
+    }
+}
+
+#meeting-content .slideshow-container {
+    flex: 1;
+    background-color: #ffffff;
+}
+
+.media-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.media-container img,
+.media-container video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transform-origin: center;
+    padding: 10px;
+    opacity: 1;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.media-container video {
+    width: 100%;
+    height: 100%;
+}
+
+/* Single definition for fullscreen exit button - both modes */
+.fullscreen-exit {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important;
+    background: #ffffff;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 12px !important;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin: 0 !important;
+    width: 48px !important;
+    height: 48px !important;
+    justify-content: center !important;
+}
+
+.fullscreen-exit:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 16px rgba(26, 35, 126, 0.25) !important;
+}
+
+/* Show exit button in fullscreen for both modes */
+.split-view.fullscreen .fullscreen-exit,
+.slideshow-container.fullscreen .fullscreen-exit,
+#meeting-content.fullscreen .fullscreen-exit,
+#meeting-content .slideshow-container.fullscreen .fullscreen-exit {
+    display: flex !important;
+}
+
+.fullscreen-exit i {
+    font-size: 1.2rem;
+    margin: 0 !important;
+}
+
+/* Fullscreen mode adjustments */
+.split-view.fullscreen,
+.slideshow-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.fullscreen .media-container {
+    height: 100vh;
+}
+
+.fullscreen .media-container img,
+.fullscreen .media-container video {
+    max-height: 100vh;
+    padding: 20px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .app-container {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .controls-panel {
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .folder-controls {
+        flex-direction: column;
+    }
+
+    .split-view {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .plan-container,
+    #meeting-content .slideshow-container {
+        height: 45vh;
+        flex: none;
+    }
+
+    .control-btn {
+        padding: 0.8rem 1.5rem;
+        min-width: 100px;
+        font-size: 0.9rem;
+    }
+
+    .control-btn i {
+        font-size: 1rem;
+        margin-right: 0.3rem;
+    }
+
+    select {
+        padding: 0.8rem 2.5rem;
+        font-size: 1rem;
+    }
+
+    .image-info {
+        padding: 1.5rem;
+    }
+
+    .image-info h3 {
+        font-size: 1.4rem;
+    }
+
+    .image-info p {
+        font-size: 1rem;
+    }
+
+    .mode-controls {
+        margin: 1rem 0 0;
+        width: 100%;
+    }
+}
+
+.image-container:hover img {
+    filter: brightness(1.05);
+}
+
+/* Image transition effects */
+.image-fade-enter {
+    opacity: 0;
+    transform: scale(1.02);
+}
+
+.image-fade-enter-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.image-fade-exit {
+    opacity: 1;
+    transform: scale(1);
+    position: absolute;
+}
+
+.image-fade-exit-active {
+    opacity: 0;
+    transform: scale(0.98);
+    position: absolute;
+}
+
+.slideshow-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: #ffffff;
+    margin: 0;
+    border-radius: 0;
+}
+
+.slideshow-container.fullscreen .image-container {
+    padding: 0;
+}
+
+.slideshow-container.fullscreen img {
+    max-height: 100vh;
+    padding: 20px;
+}
+
+/* Fullscreen button styles */
+#fullscreen {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+#fullscreen.active {
+    background: linear-gradient(135deg, var(--error-color), var(--accent-color));
+}
+
+/* Adjust controls in fullscreen */
+.slideshow-container.fullscreen .image-info {
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.98));
+}
+
+.slideshow-container.fullscreen .zoom-controls {
+    top: 2rem;
+    right: 2rem;
+}
+
+/* Hide header and controls in fullscreen */
+.fullscreen-active .app-header,
+.fullscreen-active .controls-panel {
+    display: none;
+}
+
+/* Fullscreen controls - only for meeting mode */
+.fullscreen-controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(26, 35, 126, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--primary-color);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+/* Show controls on hover */
+.fullscreen-controls:hover,
+.fullscreen-controls.active {
+    transform: translateY(0);
+}
+
+/* Hover zone for controls */
+.controls-hover-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 9998;
+}
+
+.controls-hover-zone:hover + .fullscreen-controls {
+    transform: translateY(0);
+}
+
+/* Improve button visibility in fullscreen */
+.fullscreen .control-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+.fullscreen .control-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Add pulse animation to fullscreen button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(26, 35, 126, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(26, 35, 126, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(26, 35, 126, 0);
+    }
+}
+
+#fullscreen {
+    animation: pulse 2s infinite;
+}
+
+/* Improve tooltips */
+.tooltip .tooltiptext {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+/* Add hover indicator for controls visibility */
+.controls-indicator {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 15px;
+    border-radius: 0 0 12px 12px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(26, 35, 126, 0.1);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 10001;
+}
+
+.controls-indicator:hover {
+    opacity: 1;
+}
+
+/* Improve fullscreen mode appearance */
+.fullscreen {
+    background: white !important;
+}
+
+.fullscreen .media-container {
+    padding: 20px;
+}
+
+.fullscreen img {
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+    border-radius: 12px;
+}
+
+/* Update split view for home mode */
+#home-content .split-view {
+    display: flex;
+    gap: 1rem;
+    height: calc(100vh - 90px);
+}
+
+#home-content .plan-container {
+    flex: 1;
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+}
+
+#home-content .slideshow-container {
+    flex: 1;
+    position: relative;
+}
+
+/* Meeting mode fullscreen exit button - match home mode position */
+#meeting-content .fullscreen-exit {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 100000 !important;
+    background: #ffffff;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0 !important;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin: 0 !important;
+    width: 48px !important;
+    height: 48px !important;
+    justify-content: center !important;
+}
+
+/* Remove any mode-specific positioning overrides */
+#meeting-content.fullscreen .fullscreen-exit {
+    display: flex !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+
+/* Adjust fullscreen exit button position - remove old override */
+#meeting-content .fullscreen-exit {
+    right: 0 !important;
+    top: 0 !important;
+}
+
+/* Show controls in fullscreen */
+.fullscreen-active .app-header {
+    display: none;
+}
+
+.fullscreen .fullscreen-controls {
+    display: flex;
+}
+
+/* Important: Show controls in fullscreen mode */
+.split-view.fullscreen .fullscreen-controls,
+.slideshow-container.fullscreen .fullscreen-controls {
+    display: flex !important;
+}
+
+/* Style the fullscreen controls */
+.fullscreen-controls .select-wrapper {
+    min-width: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.fullscreen-controls .folder-select.minimal {
+    color: white;
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+
+.fullscreen-controls .control-group {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.25rem;
+    margin: 0;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.fullscreen-controls .control-btn {
+    width: 40px;
+    height: 40px;
+    color: white;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fullscreen-controls .control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Show exit button in fullscreen */
+.split-view.fullscreen .fullscreen-exit,
+.slideshow-container.fullscreen .fullscreen-exit {
+    display: flex !important;
+}
+
+/* Remove loading spinner and info styles */
+.loading-spinner,
+.image-info,
+.schedule-info {
+    display: none;
+}
+
+.folder-select option {
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+/* Folder-specific styles */
+.folder-select option[value="News"] {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.folder-select option[value="Health_and_Safety"] {
+    background-color: #34a853;
+    color: white;
+}
+
+.folder-select option[value="Daily_Plan"] {
+    background-color: #fbbc04;
+    color: black;
+}
+
+.folder-select option[value="Birthday_Celebrations"] {
+    background-color: #ea4335;
+    color: white;
+}
+
+.folder-select option[value="Szeibert"] {
+    background-color: #9334e8;
+    color: white;
+}
+
+.folder-select option[value="Szeibert_Mark"] {
+    background-color: #34e8d1;
+    color: black;
+}
+
+.folder-select option[value="Event_Pictures"] {
+    background-color: #e88834;
+    color: white;
+}
+
+/* Folder icons in select */
+.select-wrapper i.folder-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Update select padding for icons */
+.select-wrapper select {
+    padding-left: 3rem;
+}
+
+.schedule-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--accent-color);
+}
+
+.schedule-info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: white;
+}
+
+.schedule-info .current {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.schedule-info .next {
+    color: var(--accent-color);
+}
+
+/* Fullscreen navigation controls */
+.fullscreen-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10001;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.fullscreen-nav .control-btn {
+    pointer-events: auto;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+.fullscreen-nav .control-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.fullscreen-nav .control-btn i {
+    font-size: 1.8rem;
+}
+
+/* Hide tooltips in fullscreen navigation */
+.fullscreen-nav .tooltiptext {
+    display: none;
+}
+
+/* Update fullscreen controls positioning */
+.fullscreen-controls {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10001;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(8px);
+    display: none;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Show controls in fullscreen */
+.split-view.fullscreen .fullscreen-controls,
+.slideshow-container.fullscreen .fullscreen-controls {
+    display: flex !important;
+}
+
+/* Fullscreen navigation controls - Meeting Mode Only */
+#meeting-content .fullscreen-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 10001;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+#meeting-content .fullscreen-nav .control-btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#meeting-content .fullscreen-nav .prev-btn {
+    left: 0;
+}
+
+#meeting-content .fullscreen-nav .next-btn {
+    right: 0;
+}
+
+#meeting-content .fullscreen-nav .control-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    width: 60px;
+}
+
+#meeting-content .fullscreen-nav .control-btn i {
+    font-size: 1.5rem;
+}
+
+/* Update fullscreen controls positioning for meeting mode */
+#meeting-content .fullscreen-controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10001;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 10px 20px;
+    display: none;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+/* Control group in fullscreen */
+#meeting-content .fullscreen-controls .control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+/* Navigation buttons in fullscreen */
+#meeting-content .fullscreen-controls .control-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#meeting-content .fullscreen-controls .control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#meeting-content .fullscreen-controls .control-btn i {
+    font-size: 1.2rem;
+}
+
+/* Select dropdowns in fullscreen */
+#meeting-content .fullscreen-controls .select-wrapper {
+    min-width: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin: 0;
+}
+
+#meeting-content .fullscreen-controls .folder-select.minimal {
+    color: white;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 8px 30px 8px 35px;
+}
+
+/* Show controls in fullscreen */
+#meeting-content.fullscreen .fullscreen-controls,
+#meeting-content .slideshow-container.fullscreen .fullscreen-controls {
+    display: flex !important;
+}
+
+/* Remove old navigation styles */
+#meeting-content .fullscreen-nav {
+    display: none !important;
+}
+
+/* Zoom controls in fullscreen */
+#meeting-content .fullscreen-controls .zoom-controls {
+    display: flex;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+/* Regular meeting mode - nav bar always visible */
+#meeting-content .app-header {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Fullscreen meeting mode - nav bar behavior */
+.fullscreen-active .app-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100000;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+#meeting-content.fullscreen .app-header {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Show nav bar on hover in fullscreen */
+#meeting-content.fullscreen .hover-zone:hover ~ .app-header,
+#meeting-content.fullscreen .app-header:hover {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+/* Hide mode buttons in fullscreen meeting mode */
+#meeting-content.fullscreen .mode-controls {
+    display: none !important;
+}
+
+/* Adjust nav controls layout when mode buttons are hidden */
+#meeting-content.fullscreen .main-nav {
+    justify-content: center;
+    width: 100%;
+}
+
+/* Hover zone for fullscreen meeting mode */
+#meeting-content.fullscreen .hover-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 99999;
+}
+
+/* Adjust the nav controls for fullscreen meeting mode */
+#meeting-content.fullscreen .nav-controls {
+    background: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Remove fullscreen transition delay */
+.fullscreen-active .app-header {
+    transition-delay: 0s !important;
+}
+
+/* Ensure controls are visible in fullscreen */
+.fullscreen-active .nav-controls {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure the header stays on top */
+.app-header {
+    z-index: 100000;
+}
+
+/* Adjust the nav controls for fullscreen meeting mode */
+#meeting-content.fullscreen .nav-controls {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin: 0.5rem;
+}
+
+#numbers-image {
+    transition: opacity 0.3s ease-in-out;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.numbers-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add subtle hover effects */
+.numbers-container:hover,
+.plan-container:hover,
+.slideshow-container:hover {
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Update transitions */
+.mode-content {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Add border radius to images */
+#numbers-image,
+#plan-image,
+#current-image,
+#meeting-current-image {
+    border-radius: 8px;
+}
+
+/* Update folder select options */
+.folder-select option {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Add subtle transitions */
+.numbers-container,
+.plan-container,
+.slideshow-container,
+.control-btn,
+.mode-btn {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Clean up mobile view */
+@media (max-width: 768px) {
+    .app-container {
+        border-width: 1px;
+    }
+    
+    .split-view {
+        padding: 0.5rem;
+    }
+    
+    .numbers-container,
+    .plan-container,
+    .slideshow-container {
+        border-width: 1px;
+    }
+}
+
+/* Add gradient accents */
+.app-header {
+    background: linear-gradient(to right, #ffffff, #f8f9ff);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Enhance images */
+.numbers-container img,
+.plan-container img,
+.media-container img {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.numbers-container img:hover,
+.plan-container img:hover,
+.media-container img:hover {
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.15);
+    transform: scale(1.02);
+}
+
+/* Add cool loading animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #f6f7f8 4%, #edeef1 25%, #f6f7f8 36%);
+    background-size: 1000px 100%;
+}
+
+/* Add cool transition effects */
+.mode-content.active {
+    animation: fadeScale 0.3s ease-out;
+}
+
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Enhance control groups */
+.control-group {
+    background-color: rgba(26, 35, 126, 0.03);
+    border: 2px solid var(--primary-color);
+    border-radius: 14px;
+    padding: 8px;
+    gap: 8px;
+}
+
+/* Add subtle hover effect to the app container */
+.app-container {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 8px 24px rgba(26, 35, 126, 0.1);
+    transition: all 0.3s ease;
+}
+
+.app-container:hover {
+    box-shadow: 0 12px 32px rgba(26, 35, 126, 0.15);
+}
+
+/* Improve fullscreen exit button */
+.fullscreen-exit {
+    border: 2px solid var(--primary-color) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.fullscreen-exit:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 16px rgba(26, 35, 126, 0.25) !important;
+}
+
+/* Add subtle grid background */
+.main-content {
+    background-image: linear-gradient(rgba(26, 35, 126, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(26, 35, 126, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: #ffffff;
+}

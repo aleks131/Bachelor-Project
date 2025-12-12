@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Plan - Smart Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/app-overrides.css">
+    <link rel="stylesheet" href="../styles/daily-plan.css">
+    <link rel="stylesheet" href="../styles/smart-image.css">
+    <link rel="stylesheet" href="../styles/dark-theme.css">
+    <link rel="stylesheet" href="../styles/theme-toggle.css">
+    <link rel="stylesheet" href="../styles/ui-fixes.css">
+    <link rel="stylesheet" href="../styles/ui-enhancements.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="../assets/triple-a-logo.svg" alt="TripleA Logo" class="logo">
+            </div>
+            <div class="header-info">
+                <h1>Daily Plan</h1>
+                <div class="current-time" id="current-time"></div>
+                <div class="current-schedule" id="current-schedule"></div>
+            </div>
+            <div class="header-controls">
+                <button id="back-to-dashboard" class="control-btn tooltip" title="Back to Dashboard">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button id="fullscreen" class="control-btn tooltip">
+                    <i class="fas fa-expand"></i>
+                    <span class="tooltiptext">Fullscreen</span>
+                </button>
+                <button id="refresh" class="control-btn tooltip">
+                    <i class="fas fa-sync-alt"></i>
+                    <span class="tooltiptext">Refresh</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="plan-container">
+                <div class="plan-image-container">
+                    <img id="plan-image" src="" alt="Daily Plan" style="display: none;">
+                    <div class="loading-indicator" id="loading">
+                        <div class="spinner"></div>
+                        <p>Loading plan...</p>
+                    </div>
+                    <div class="no-image-message" id="no-image" style="display: none;">
+                        <i class="fas fa-image"></i>
+                        <p>No plan image available for current time</p>
+                    </div>
+                </div>
+                
+                <div class="plan-info">
+                    <div class="schedule-info" id="schedule-info">
+                        <h3>Current Schedule</h3>
+                        <div class="schedule-details">
+                            <div class="schedule-item">
+                                <span class="schedule-name" id="schedule-name">-</span>
+                                <span class="schedule-time" id="schedule-time">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="next-schedule" id="next-schedule">
+                        <h4>Next Schedule</h4>
+                        <div class="next-schedule-details">
+                            <span id="next-schedule-name">-</span>
+                            <span id="next-schedule-time">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="fullscreen-exit tooltip" style="display: none;">
+            <i class="fas fa-compress"></i>
+            <span class="tooltiptext">Exit Fullscreen</span>
+        </button>
+    </div>
+    
+    <script src="../scripts/schedule-manager.js"></script>
+    <script src="../scripts/smart-image.js"></script>
+    <script src="../scripts/daily-plan.js"></script>
+    <script src="../scripts/analytics.js"></script>
+    <script src="../scripts/keyboard-shortcuts.js"></script>
+    <script src="../scripts/theme-manager.js"></script>
+    <script src="../scripts/notification-system.js"></script>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+</body>
+</html>

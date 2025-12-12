@@ -1,0 +1,21 @@
+.file-source-selector {
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 6px;
+    border-radius: 16px;
+}
+
+.file-source-selector .premium-button-secondary {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    min-width: auto;
+    border-radius: 12px;
+}
+
+.file-source-selector .premium-button-secondary.active {
+    background: var(--primary-gradient);
+    color: white;
+    border-color: transparent;
+}
+

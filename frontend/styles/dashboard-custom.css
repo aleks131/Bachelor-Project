@@ -1,0 +1,525 @@
+/* Custom styles to make ALL KPI windows exactly the same size */
+
+/* Reset all existing layout styles */
+.performance-dashboard {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.dashboard-header {
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: #f8f8f8 !important;
+    border-bottom: 2px solid #333 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+.dashboard-header h1 {
+    margin: 0 !important;
+    text-align: center !important;
+    font-size: 28px !important;
+    font-weight: bold !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.dashboard-header .logo {
+    position: absolute !important;
+    left: 20px !important;
+    height: 40px !important;
+    width: auto !important;
+}
+
+.dashboard-grid {
+    display: flex !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: calc(100vh - 60px) !important;
+}
+
+/* Make sidebar same styling as main columns */
+.sidebar-column {
+    width: 25% !important;
+    min-width: 0 !important;
+    max-width: 25% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 5px !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    background-color: #ffffff !important;
+    border-right: 1px solid #ddd !important;
+}
+
+/* Main grid area with 3 equal columns */
+.main-grid-area {
+    display: flex !important;
+    width: 75% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+
+.grid-column {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 5px !important;
+    gap: 0 !important;
+    box-sizing: border-box !important;
+    background-color: #ffffff !important;
+    border-right: 1px solid #ddd !important;
+    overflow: hidden !important;
+}
+
+.grid-column:last-child {
+    border-right: none !important;
+}
+
+/* Make all category headers the same height */
+.category-header {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    background-color: #f5f5f5 !important;
+    border-bottom: 1px solid #ddd !important;
+    font-size: 22px !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+}
+
+/* Calculate exact height for KPI cards to fill available space with no scrolling needed */
+.sidebar-column .kpi-card,
+.grid-column .kpi-card {
+    height: calc((100vh - 60px - 45px - 25px - 5px) / 4) !important;
+    min-height: calc((100vh - 60px - 45px - 25px - 5px) / 4) !important;
+    max-height: calc((100vh - 60px - 45px - 25px - 5px) / 4) !important;
+    width: 100% !important;
+    flex: none !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: #fff !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    cursor: grab !important;
+}
+
+/* Last card in each column should not have bottom margin */
+.sidebar-column .kpi-card:last-child,
+.grid-column .kpi-card:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Hide indicator dots */
+.kpi-indicator {
+    display: none !important;
+}
+
+.indicator-dot {
+    display: none !important;
+}
+
+/* Make KPI content (text elements) hidden to show only images */
+.kpi-content {
+    display: none !important;
+}
+
+/* Adjust image container to fill the entire card */
+.kpi-image-container {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+    background-color: transparent !important;
+}
+
+.kpi-image-container img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill !important;
+    display: block !important;
+    transition: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* When an image is being loaded, make sure it's hidden until fully loaded */
+.kpi-image-container img[data-loading="true"] {
+    opacity: 0 !important;
+}
+
+/* Ensure multiple images in the same container stack properly */
+.kpi-image-container img + img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+/* Ensure title stays on top of images with improved visibility */
+.kpi-title {
+    position: relative !important;
+    z-index: 2 !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    padding: 4px 8px !important;
+    margin: 0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 4px !important;
+    font-weight: bold !important;
+    max-width: 90% !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    pointer-events: none !important; /* Prevent title from interfering with clicks */
+}
+
+/* Image update animation */
+@keyframes update-flash {
+    0% { box-shadow: 0 0 0 2px rgba(0, 102, 204, 0); }
+    25% { box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.7); }
+    50% { box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.5); }
+    75% { box-shadow: 0 0 0 6px rgba(0, 102, 204, 0.3); }
+    100% { box-shadow: 0 0 0 8px rgba(0, 102, 204, 0); }
+}
+
+.kpi-card.image-updated {
+    animation: update-flash 1.5s ease-out !important;
+}
+
+/* Dark theme version */
+body.dark-theme .kpi-card.image-updated {
+    animation: update-flash-dark 1.5s ease-out !important;
+}
+
+@keyframes update-flash-dark {
+    0% { box-shadow: 0 0 0 2px rgba(51, 153, 255, 0); }
+    25% { box-shadow: 0 0 0 2px rgba(51, 153, 255, 0.7); }
+    50% { box-shadow: 0 0 0 4px rgba(51, 153, 255, 0.5); }
+    75% { box-shadow: 0 0 0 6px rgba(51, 153, 255, 0.3); }
+    100% { box-shadow: 0 0 0 8px rgba(51, 153, 255, 0); }
+}
+
+/* Remove flash effect from older styles - replaced with smooth transitions */
+@keyframes none-animation {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+.image-updated {
+    animation: none-animation 0.1s !important;
+}
+
+/* Remove any remaining gaps */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Disable the remove window mode */
+body.remove-window-mode .kpi-card {
+    cursor: grab !important;
+}
+
+.kpi-delete-btn {
+    display: none !important;
+}
+
+/* Fix fullscreen mode */
+.kpi-card.fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    z-index: 1000 !important;
+    background-color: white !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
+    cursor: default !important;
+}
+
+/* Hide fullscreen exit button */
+.fullscreen-exit {
+    display: none !important;
+}
+
+/* Draggable cards styling - improved visual feedback */
+.kpi-card.draggable {
+    cursor: grab !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease !important;
+    will-change: transform, opacity !important;
+    user-select: none !important;
+}
+
+.kpi-card.dragging {
+    cursor: grabbing !important;
+    opacity: 0.9 !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+    z-index: 1000 !important;
+    pointer-events: none !important;
+    background: white !important;
+}
+
+/* Improve drop target feedback */
+.grid-column.drag-enabled,
+.sidebar-column.drag-enabled {
+    min-height: 100px !important;
+    transition: all 0.3s ease !important;
+    padding: 8px !important;
+    border: 2px solid transparent !important;
+}
+
+.grid-column.drag-over,
+.sidebar-column.drag-over {
+    background-color: rgba(0, 102, 204, 0.05) !important;
+    border: 2px dashed #0066cc !important;
+}
+
+/* Improved sortable placeholder */
+.sortable-ghost {
+    opacity: 0.3 !important;
+    background-color: #f0f7ff !important;
+    border: 2px dashed #0066cc !important;
+    box-shadow: none !important;
+    transform: scale(0.98) !important;
+}
+
+.sortable-chosen {
+    opacity: 1 !important;
+    z-index: 1000 !important;
+}
+
+/* Drag handle indicator */
+.kpi-card::before {
+    content: "⋮⋮" !important;
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    font-size: 14px !important;
+    color: #0066cc !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+    font-weight: bold !important;
+}
+
+.kpi-card.draggable:hover::before {
+    opacity: 0.7 !important;
+}
+
+/* Add a hint for draggable state */
+body.drag-mode .kpi-card::before {
+    content: "≡";
+    position: absolute !important;
+    top: 5px !important;
+    left: 10px !important;
+    font-size: 16px !important;
+    color: #0066cc !important;
+    opacity: 0.6 !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+}
+
+/* Animate appearance of drag handle for better UX */
+body.drag-mode .kpi-card:hover::before {
+    opacity: 1 !important;
+    transform: scale(1.2) !important;
+    transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+
+/* Toast container and notifications */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 300px;
+}
+
+.toast {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    font-size: 14px;
+    border-left: 4px solid #3498db;
+    max-width: 100%;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast i {
+    font-size: 16px;
+}
+
+.toast.success {
+    border-left-color: #2ecc71;
+}
+
+.toast.error {
+    border-left-color: #e74c3c;
+}
+
+.toast.warning {
+    border-left-color: #f39c12;
+}
+
+.toast.info {
+    border-left-color: #3498db;
+}
+
+body.dark-theme .toast {
+    background-color: #333;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Settings Menu Styles */
+.settings-menu-container {
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1000 !important;
+}
+
+.settings-toggle {
+    background: #0066cc !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.settings-toggle:hover {
+    background: #0052a3 !important;
+}
+
+.settings-dropdown {
+    display: none !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    min-width: 200px !important;
+    padding: 10px !important;
+    z-index: 1001 !important;
+}
+
+.settings-dropdown.show {
+    display: block !important;
+}
+
+.settings-section {
+    margin-bottom: 15px !important;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0 !important;
+}
+
+.settings-section h3 {
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    color: #333 !important;
+    border-bottom: 1px solid #eee !important;
+    padding-bottom: 5px !important;
+}
+
+.settings-btn {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 8px 12px !important;
+    margin: 5px 0 !important;
+    border: none !important;
+    background: #f8f8f8 !important;
+    color: #333 !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    font-size: 14px !important;
+}
+
+.settings-btn:hover {
+    background: #ebebeb !important;
+}
+
+.settings-btn i {
+    margin-right: 8px !important;
+    width: 16px !important;
+    text-align: center !important;
+}
+
+.shortcut-key {
+    margin-left: auto !important;
+    padding: 2px 6px !important;
+    background: #eee !important;
+    border-radius: 3px !important;
+    font-size: 12px !important;
+    color: #666 !important;
+} 

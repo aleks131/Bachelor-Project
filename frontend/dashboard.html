@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Solutions - Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/premium-theme.css">
+    <link rel="stylesheet" href="styles/premium-ui.css">
+    <link rel="stylesheet" href="styles/branding-overrides.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="styles/smart-image.css">
+    <link rel="stylesheet" href="styles/dark-theme.css">
+    <link rel="stylesheet" href="styles/bulk-operations.css">
+    <link rel="stylesheet" href="styles/toast-notifications.css">
+    <link rel="stylesheet" href="styles/loading-states.css">
+    <link rel="stylesheet" href="styles/file-preview.css">
+    <link rel="stylesheet" href="styles/context-menu.css">
+    <link rel="stylesheet" href="styles/drag-drop-upload.css">
+    <link rel="stylesheet" href="styles/favorites.css">
+    <link rel="stylesheet" href="styles/ai-features.css">
+    <link rel="stylesheet" href="styles/theme-toggle.css">
+    <link rel="stylesheet" href="styles/ui-fixes.css">
+    <link rel="stylesheet" href="styles/ui-enhancements.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <img src="assets/salling.png" alt="TripleA Logo" class="logo">
+                <div class="header-title-group">
+                    <h1 class="premium-title" style="font-size: 2rem; margin: 0;">Smart Solutions</h1>
+                    <span class="premium-subtitle-small">by TripleA</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="user-info" id="userInfo"></span>
+                <button class="logout-button" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+        
+        <main class="dashboard-main">
+            <div class="apps-grid" id="appsGrid">
+            </div>
+        </main>
+    </div>
+    
+    <script src="scripts/dashboard.js"></script>
+    <script src="scripts/analytics.js"></script>
+    <script src="scripts/keyboard-shortcuts.js"></script>
+    <script src="scripts/theme-manager.js"></script>
+    <script src="scripts/notification-system.js"></script>
+    <script src="scripts/bulk-operations.js"></script>
+    <script src="scripts/toast-notifications.js"></script>
+    <script src="scripts/enhanced-search.js"></script>
+    <script src="scripts/loading-states.js"></script>
+    <script src="scripts/file-management.js"></script>
+    <script src="scripts/file-preview.js"></script>
+    <script src="scripts/context-menu.js"></script>
+    <script src="scripts/export-system.js"></script>
+    <script src="scripts/drag-drop-upload.js"></script>
+    <script src="scripts/favorites.js"></script>
+    <script src="scripts/virtual-scroll.js"></script>
+    <script src="scripts/ai-features.js"></script>
+    <script src="scripts/ai-ui.js"></script>
+    
+    <!-- Global Search Component -->
+    <div include-html="components/global-search.html"></div>
+    
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+    
+    <script>
+        // Include HTML helper
+        document.querySelectorAll('[include-html]').forEach(async (el) => {
+            const file = el.getAttribute('include-html');
+            try {
+                const response = await fetch(file);
+                const html = await response.text();
+                el.outerHTML = html;
+            } catch (error) {
+                console.error('Error loading component:', error);
+            }
+        });
+    </script>
+</body>
+</html>

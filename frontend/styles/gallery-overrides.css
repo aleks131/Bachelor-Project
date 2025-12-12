@@ -1,0 +1,23 @@
+/* Specific overrides for gallery mode buttons */
+.mode-controls .premium-button-secondary {
+    box-shadow: none;
+    border-right: none;
+    min-width: 50px;
+    padding: 10px 15px;
+}
+
+.mode-controls .premium-button-secondary:last-child {
+    border-right: 3px solid var(--primary-color);
+}
+
+.mode-controls .premium-button-secondary.active {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+/* Hide original button styles if they conflict */
+.icon-btn {
+    background: none;
+    border: none;
+}
+

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard - Salling Unified App</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.css">
+    <link rel="stylesheet" href="../styles/dashboard-app.css">
+    <link rel="stylesheet" href="../styles/dashboard-custom.css">
+    <link rel="stylesheet" href="../styles/theme-toggle.css">
+    <link rel="stylesheet" href="../styles/ui-fixes.css">
+    <link rel="stylesheet" href="../styles/ui-enhancements.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+<body>
+    <div class="performance-dashboard">
+        <div class="dashboard-header">
+            <img src="../assets/triple-a-logo.svg" alt="TripleA Logo" class="logo">
+            <h1>PERFORMANCE</h1>
+            <button id="back-to-dashboard" class="btn-back">
+                <i class="fas fa-home"></i> Dashboard
+            </button>
+            
+            <div class="settings-menu-container">
+                <button class="settings-toggle" id="settingsToggle">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="settings-dropdown" id="settingsDropdown">
+                    <div class="settings-section">
+                        <h3>Layout</h3>
+                        <button class="settings-btn" id="enableDragMode">
+                            <i class="fas fa-arrows-alt"></i> Rearrange Cards
+                        </button>
+                        <button class="settings-btn" id="saveLayout">
+                            <i class="fas fa-save"></i> Save Layout
+                        </button>
+                        <button class="settings-btn" id="resetLayout">
+                            <i class="fas fa-undo"></i> Reset Layout
+                        </button>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Presentation</h3>
+                        <button class="settings-btn" id="enterMeetingMode">
+                            <i class="fas fa-presentation"></i> Meeting Mode
+                        </button>
+                        <button class="settings-btn" id="printDashboard">
+                            <i class="fas fa-print"></i> Print Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="sidebar-column">
+                <div class="category-header">PRODUCTION</div>
+                <div class="kpi-card" id="kpi-1">
+                    <div class="kpi-indicator">
+                        <div class="indicator-dot yellow"></div>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">KPI 2</div>
+                        <div class="kpi-number">-</div>
+                    </div>
+                </div>
+                <div class="kpi-card" id="kpi-2">
+                    <div class="kpi-indicator">
+                        <div class="indicator-dot yellow"></div>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">KPI 3</div>
+                        <div class="kpi-number">-</div>
+                    </div>
+                </div>
+                <div class="kpi-card" id="kpi-3">
+                    <div class="kpi-indicator">
+                        <div class="indicator-dot"></div>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">KPI 4</div>
+                        <div class="kpi-number">-</div>
+                    </div>
+                </div>
+                <div class="kpi-card" id="kpi-4">
+                    <div class="kpi-indicator">
+                        <div class="indicator-dot yellow"></div>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">KPI 17</div>
+                        <div class="kpi-number">-</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-grid-area">
+                <div class="grid-column">
+                    <div class="category-header">PEOPLE</div>
+                    <div class="kpi-card" id="kpi-people-1">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 5</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-people-2">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 6</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-people-3">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 7</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-people-4">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 8</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid-column">
+                    <div class="category-header">CUSTOMER</div>
+                    <div class="kpi-card" id="kpi-customer-1">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 9</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-customer-2">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 10</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-customer-3">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 11</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-customer-4">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 12</div>
+                            <div class="kpi-number red">-</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid-column">
+                    <div class="category-header">COST</div>
+                    <div class="kpi-card" id="kpi-cost-1">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 13</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-cost-2">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 14</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-cost-3">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 15</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" id="kpi-cost-4">
+                        <div class="kpi-content">
+                            <div class="kpi-title">KPI 16</div>
+                            <div class="kpi-number blue">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="file-browser-modal" id="fileBrowserModal">
+        <div class="file-browser-content">
+            <div class="file-browser-header">
+                <h2>Select Image</h2>
+                <span class="file-browser-close">&times;</span>
+            </div>
+            <div class="current-kpi-indicator">
+                <span id="currentKpiTitle">Select KPI Card</span>
+            </div>
+            <div class="file-source-tabs">
+                <button class="source-tab active" data-source="main">Main</button>
+                <button class="source-tab" data-source="extra">Extra</button>
+                <button class="source-tab" data-source="kpi-meeting">KPI Meeting</button>
+            </div>
+            <div class="source-content active" id="mainContent">
+                <div class="file-browser-items" id="fileBrowserItems">
+                    <div class="file-browser-loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/dashboard-app.js"></script>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+</body>
+</html>

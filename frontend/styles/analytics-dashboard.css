@@ -1,0 +1,116 @@
+/* Analytics Dashboard Styles */
+
+.analytics-dashboard {
+    padding: 2rem;
+}
+
+.analytics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.analytics-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.analytics-card {
+    background: var(--bg-secondary, #2d2d2d);
+    border: 1px solid var(--border-color, #404040);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-height: 200px;
+}
+
+.analytics-card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-primary, #e0e0e0);
+    font-size: 1.1rem;
+}
+
+.analytics-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--accent-color, #4a90e2);
+}
+
+.analytics-table-section {
+    background: var(--bg-secondary, #2d2d2d);
+    border: 1px solid var(--border-color, #404040);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.analytics-table-section h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-primary, #e0e0e0);
+}
+
+.analytics-table-container {
+    overflow-x: auto;
+}
+
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.analytics-table th,
+.analytics-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color, #404040);
+    color: var(--text-primary, #e0e0e0);
+}
+
+.analytics-table th {
+    font-weight: 600;
+    background: var(--bg-tertiary, #3a3a3a);
+}
+
+.event-type-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.event-page_view {
+    background: rgba(74, 144, 226, 0.2);
+    color: #4a90e2;
+}
+
+.event-app_usage {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.event-file_operation {
+    background: rgba(255, 152, 0, 0.2);
+    color: #ff9800;
+}
+
+.event-search {
+    background: rgba(156, 39, 176, 0.2);
+    color: #9c27b0;
+}
+
+/* Dark theme */
+[data-theme="dark"] .analytics-card,
+[data-theme="dark"] .analytics-table-section {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitoring - Smart Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/monitoring.css">
+    <link rel="stylesheet" href="styles/premium-theme.css">
+    <link rel="stylesheet" href="styles/premium-ui.css">
+    <link rel="stylesheet" href="styles/dark-theme.css">
+</head>
+<body>
+    <div class="monitoring-container">
+        <header class="monitoring-header">
+            <div class="header-content">
+                <img src="assets/salling.png" alt="TripleA Logo" class="logo">
+                <h1><i class="fas fa-heartbeat"></i> System Monitoring</h1>
+                <div class="header-actions">
+                    <button id="refresh-btn" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <a href="/admin" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Admin Panel
+                    </a>
+                    <button id="logout-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="monitoring-status-bar">
+            <div class="status-indicator" id="health-status">
+                <i class="fas fa-circle"></i>
+                <span id="health-text">Checking...</span>
+            </div>
+            <div class="status-info">
+                <span><i class="fas fa-clock"></i> Uptime: <strong id="uptime">-</strong></span>
+                <span><i class="fas fa-server"></i> Server: <strong id="server-time">-</strong></span>
+            </div>
+        </div>
+
+        <main class="monitoring-main">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3><i class="fas fa-tachometer-alt"></i> System Health</h3>
+                    </div>
+                    <div class="metric-content" id="health-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3><i class="fas fa-server"></i> System Resources</h3>
+                    </div>
+                    <div class="metric-content" id="system-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3><i class="fas fa-globe"></i> WebSocket Connections</h3>
+                    </div>
+                    <div class="metric-content" id="websocket-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3><i class="fas fa-file-alt"></i> File Watchers</h3>
+                    </div>
+                    <div class="metric-content" id="watcher-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3><i class="fas fa-chart-line"></i> Performance</h3>
+                    </div>
+                    <div class="metric-content" id="performance-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3><i class="fas fa-users"></i> Users</h3>
+                    </div>
+                    <div class="metric-content" id="users-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="details-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list"></i> Recent Errors</h3>
+                        <button id="view-all-errors" class="btn btn-sm">View All</button>
+                    </div>
+                    <div class="card-content" id="errors-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="details-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-route"></i> Top Endpoints</h3>
+                    </div>
+                    <div class="card-content" id="endpoints-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/monitoring.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Smart Solutions</title>
+    <link rel="stylesheet" href="/styles/premium-theme.css">
+    <link rel="stylesheet" href="/styles/premium-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .error-card {
+            text-align: center;
+            max-width: 500px;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin: 1rem 0 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="premium-card error-card">
+        <div class="premium-icon-large" style="font-size: 6rem; margin-bottom: 0;">
+            <i class="fas fa-ghost"></i>
+        </div>
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Oops! The page you're looking for doesn't exist.</p>
+        <button class="premium-button" onclick="window.history.back()">
+            <i class="fas fa-arrow-left"></i>
+            <span>Go Back</span>
+        </button>
+        <button class="premium-button premium-button-secondary" onclick="window.location.href='/'" style="margin-left: 10px;">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </button>
+    </div>
+</body>
+</html>

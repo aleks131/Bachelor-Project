@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Solutions - Login</title>
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/premium-theme.css">
+    <link rel="stylesheet" href="styles/premium-ui.css">
+    <link rel="stylesheet" href="styles/ui-fixes.css">
+    <link rel="stylesheet" href="styles/ui-enhancements.css">
+    <link rel="stylesheet" href="styles/branding-overrides.css">
+    <link rel="icon" type="image/svg+xml" href="assets/triple-a-logo.svg">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="assets/salling.png" alt="TripleA Logo" class="logo">
+                <h1 class="premium-title">Smart Solutions</h1>
+                <p class="premium-subtitle">By TripleA</p>
+                <p class="premium-text">Please login to continue</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username" class="premium-label">Username</label>
+                    <input type="text" id="username" name="username" class="premium-input" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="premium-label">Password</label>
+                    <input type="password" id="password" name="password" class="premium-input" required>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+                
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                
+                <button type="submit" class="login-button premium-button premium-button-large">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="scripts/login.js"></script>
+</body>
+</html>
