@@ -35,9 +35,8 @@ npm start
 ```
 
 Or use the batch files:
-- `QUICK-START-ALL.bat` - Full setup and start
-- `START-SERVER.bat` - Start server only
-- `INSTALL-DEPENDENCIES.bat` - Install dependencies
+- `SETUP.bat` - First-time setup (install dependencies, create admin user)
+- `START.bat` - Start the software (daily use)
 
 ## 🔐 Default Login
 
