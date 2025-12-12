@@ -282,6 +282,10 @@ app.get('/dashboard', requireAuth, (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
 });
 
+app.get('/mockups-showcase', requireAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/mockups-showcase.html'));
+});
+
 app.get('/app/:appName', requireAuth, (req, res) => {
     const { appName } = req.params;
     const user = req.user;
