@@ -83,7 +83,7 @@ This documentation package provides comprehensive coverage of the Smart Solution
 
 ---
 
-### 4. IMPROVEMENTS-v2.1.0.md
+### 4. IMPROVEMENTS-v2.0.0.md
 **Summary of latest improvements:**
 
 - Security Improvements
@@ -120,7 +120,7 @@ This documentation package provides comprehensive coverage of the Smart Solution
    - Include architecture flow diagrams
 
 5. **Conclusion Section**
-   - Reference improvements from IMPROVEMENTS-v2.1.0.md
+   - Reference improvements from IMPROVEMENTS-v2.0.0.md
    - Summarize key technical achievements
 
 ---
@@ -236,7 +236,7 @@ This documentation package provides comprehensive coverage of the Smart Solution
 - `SOFTWARE-DOCUMENTATION.md` - Main technical documentation
 - `ARCHITECTURE-DIAGRAMS.md` - Architecture diagrams
 - `CODE-EXAMPLES.md` - Code examples
-- `IMPROVEMENTS-v2.1.0.md` - Latest improvements
+- `IMPROVEMENTS-v2.0.0.md` - Latest improvements
 - `README.md` - Project overview
 - `HOW-TO-RUN-AND-TEST.md` - Testing guide
 - `mockups/` - Visual mockups of each application

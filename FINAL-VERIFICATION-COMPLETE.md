@@ -268,7 +268,7 @@ The Smart Solutions platform is:
 ---
 
 **Last Verified**: December 12, 2025  
-**Version**: 2.1.0  
+**Version**: 2.0.0  
 **Repository**: https://github.com/aleks131/Bachelor-Project-
 
 **Everything is working absolutely perfectly and looks amazing!** 🎉
