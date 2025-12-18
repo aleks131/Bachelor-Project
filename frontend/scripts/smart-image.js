@@ -103,8 +103,13 @@ class SmartImage {
             this.imageCache.set(cacheKey, data);
             return data;
         } catch (error) {
-            console.error('Error getting best fit:', error);
-            return null;
+            console.warn('SmartImage: Failed to get best fit, falling back to original.', error);
+            // Return safe fallback to prevent crashes
+            return {
+                bestFit: { width: containerWidth, height: containerHeight, displayMode: 'contain' },
+                metadata: { width: containerWidth, height: containerHeight, aspectRatio: containerWidth/containerHeight },
+                recommendations: { useThumbnail: false, optimizeForWeb: false }
+            };
         }
     }
 

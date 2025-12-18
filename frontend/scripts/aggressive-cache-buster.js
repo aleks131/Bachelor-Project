@@ -1,5 +1,5 @@
 (function() {
-    const VERSION = '2.0.2';
+    const VERSION = '2.0.3';
     const TIMESTAMP = Date.now();
     
     function addCacheBuster() {

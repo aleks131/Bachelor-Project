@@ -142,6 +142,7 @@ class AdvancedImageViewer {
     async loadImage(imagePath) {
         this.currentImage = imagePath;
         
+        /* DIRECT LOAD BYPASS - SmartImage disabled due to API 404s
         // Get metadata
         const metadata = await smartImage.getMetadata(imagePath);
         this.currentMetadata = metadata;
@@ -160,6 +161,22 @@ class AdvancedImageViewer {
             containerWidth: container.offsetWidth,
             containerHeight: container.offsetHeight
         });
+        */
+       
+        // Direct Load
+        const img = document.getElementById('viewer-image');
+        img.src = imagePath;
+        
+        // Mock metadata for info panel
+        this.currentMetadata = {
+            width: img.naturalWidth || 0,
+            height: img.naturalHeight || 0,
+            aspectRatio: (img.naturalWidth / img.naturalHeight) || 0,
+            format: imagePath.split('.').pop() || 'unknown',
+            fileSize: 'Unknown',
+            isPortrait: img.naturalHeight > img.naturalWidth,
+            isLandscape: img.naturalWidth > img.naturalHeight
+        };
         
         this.updateInfo();
         this.resetZoom();
