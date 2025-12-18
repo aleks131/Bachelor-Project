@@ -73,14 +73,15 @@ class MonitoringDashboard {
     
     async loadData() {
         try {
-            const [summary, health, performance, websockets, watchers, users, errors] = await Promise.all([
+            const [summary, health, performance, websockets, watchers, users, errors, capabilities] = await Promise.all([
                 fetch('/api/monitoring/summary').then(r => r.json()),
                 fetch('/api/monitoring/health').then(r => r.json()),
                 fetch('/api/monitoring/performance').then(r => r.json()),
                 fetch('/api/monitoring/websockets').then(r => r.json()),
                 fetch('/api/monitoring/file-watchers').then(r => r.json()),
                 fetch('/api/monitoring/users').then(r => r.json()),
-                fetch('/api/monitoring/errors?limit=10').then(r => r.json())
+                fetch('/api/monitoring/errors?limit=10').then(r => r.json()),
+                fetch('/api/monitoring/capabilities').then(r => r.json())
             ]);
             
             this.updateDisplay(summary, health);
@@ -90,6 +91,7 @@ class MonitoringDashboard {
             this.updateUsers(users);
             this.updateErrors(errors.errors);
             this.updateEndpoints(performance.topEndpoints);
+            this.updateCapabilities(capabilities);
         } catch (error) {
             console.error('Error loading monitoring data:', error);
             this.showError('Failed to load monitoring data');
@@ -310,6 +312,62 @@ class MonitoringDashboard {
         `;
     }
     
+    updateCapabilities(capabilities) {
+        const content = document.getElementById('capabilities-content');
+        if (!content) return;
+
+        content.innerHTML = `
+            <div class="capabilities-list">
+                <div class="capability-item ${capabilities.usbDetection ? 'active' : 'inactive'}">
+                    <i class="fas fa-usb"></i>
+                    <div class="cap-info">
+                        <span class="cap-name">USB Auto-Detection</span>
+                        <span class="cap-status">${capabilities.usbDetection ? 'Active' : 'Disabled'}</span>
+                    </div>
+                </div>
+                <div class="capability-item ${capabilities.ocrReady ? 'active' : 'inactive'}">
+                    <i class="fas fa-eye"></i>
+                    <div class="cap-info">
+                        <span class="cap-name">OCR Text Analysis</span>
+                        <span class="cap-status">${capabilities.ocrReady ? 'Ready' : 'Unavailable'}</span>
+                    </div>
+                </div>
+                <div class="capability-item ${capabilities.pdfSupport ? 'active' : 'inactive'}">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="cap-info">
+                        <span class="cap-name">PDF Support</span>
+                        <span class="cap-status">${capabilities.pdfSupport ? 'Enabled' : 'Disabled'}</span>
+                    </div>
+                </div>
+                <div class="capability-item ${capabilities.offlineMode ? 'active' : 'inactive'}">
+                    <i class="fas fa-wifi-slash"></i>
+                    <div class="cap-info">
+                        <span class="cap-name">Offline Mode</span>
+                        <span class="cap-status">${capabilities.offlineMode ? 'Verified' : 'Unverified'}</span>
+                    </div>
+                </div>
+                <div class="capability-item ${capabilities.faultTolerance ? 'active' : 'inactive'}">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="cap-info">
+                        <span class="cap-name">Fault Tolerance</span>
+                        <span class="cap-status">${capabilities.faultTolerance ? 'Active' : 'Inactive'}</span>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .capabilities-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+                .capability-item { display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 3px solid #555; }
+                .capability-item.active { border-left-color: #10b981; }
+                .capability-item.inactive { border-left-color: #ef4444; opacity: 0.7; }
+                .capability-item i { font-size: 1.2rem; margin-right: 12px; width: 20px; text-align: center; }
+                .capability-item.active i { color: #10b981; }
+                .cap-info { display: flex; flex-direction: column; }
+                .cap-name { font-weight: 500; font-size: 0.9rem; }
+                .cap-status { font-size: 0.75rem; color: #888; }
+            </style>
+        `;
+    }
+
     startAutoRefresh() {
         this.updateInterval = setInterval(() => {
             this.loadData();

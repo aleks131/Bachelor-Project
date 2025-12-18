@@ -4,6 +4,7 @@ const monitoring = require('../utils/monitoring');
 const auth = require('../auth');
 const fs = require('fs');
 const path = require('path');
+const capabilitiesCheck = require('../utils/capabilities-check');
 
 const requireAdmin = (req, res, next) => {
     if (req.session && req.session.userId) {
@@ -15,6 +16,16 @@ const requireAdmin = (req, res, next) => {
     }
     res.status(403).json({ error: 'Admin access required' });
 };
+
+router.get('/capabilities', requireAdmin, async (req, res) => {
+    try {
+        const capabilities = await capabilitiesCheck.runCheck();
+        res.json(capabilities);
+    } catch (error) {
+        console.error('Error getting capabilities:', error);
+        res.status(500).json({ error: 'Failed to get capabilities' });
+    }
+});
 
 router.get('/metrics', requireAdmin, (req, res) => {
     try {
