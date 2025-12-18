@@ -165,3 +165,4 @@
 
 **Purpose**: This diagram shows the complete system architecture, demonstrating how hardware (Raspberry Pi, screen, network drive) and software (Node.js server, browser) interact to create the unified application platform.
 
+

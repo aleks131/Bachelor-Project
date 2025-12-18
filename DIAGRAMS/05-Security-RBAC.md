@@ -323,3 +323,4 @@ function hasPermission(user, permission) {
 
 **Purpose**: This flowchart demonstrates the security implementation, showing how authentication and authorization work together to provide role-based access control, ensuring users only have access to features appropriate for their role.
 
+

@@ -320,3 +320,4 @@ Each Raspberry Pi:
 
 **Purpose**: This deployment diagram shows how the standalone application is deployed in the real world (Salling Group), demonstrating the network drive architecture, Raspberry Pi setup, and browser kiosk mode configuration, proving the system's deployability and ease of setup.
 
+

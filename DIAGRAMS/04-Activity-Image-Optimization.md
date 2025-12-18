@@ -265,3 +265,4 @@ async function getOptimizedImage(filePath) {
 
 **Purpose**: This activity diagram explains the performance optimization strategy for low-power devices like the Raspberry Pi, demonstrating how images are intelligently processed to reduce resource usage while maintaining quality.
 
+

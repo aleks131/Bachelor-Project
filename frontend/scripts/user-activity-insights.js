@@ -113,3 +113,4 @@ class UserActivityInsights {
 
 window.userActivityInsights = new UserActivityInsights();
 
+

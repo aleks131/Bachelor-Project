@@ -301,3 +301,4 @@ Login → Dashboard → Admin Panel → Layout Builder → Add Widgets → Confi
 
 **Purpose**: This sitemap shows the complete user journey through the application, demonstrating the navigation structure, user flows, and how different user roles access different features, providing a clear understanding of the application's user experience.
 
+

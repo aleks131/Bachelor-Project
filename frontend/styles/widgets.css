@@ -1,0 +1,179 @@
+/* Widget Grid System */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.widget {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out backwards;
+}
+
+.dark-mode .widget {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Welcome Widget - Spans full width */
+.widget-welcome {
+    grid-column: span 12;
+    background: var(--primary-gradient);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.welcome-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.welcome-date {
+    font-size: 3rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Stats Widgets */
+.widget-stat {
+    grid-column: span 3;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-info h3 {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+}
+
+.stat-info .value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Quick Actions */
+.widget-actions {
+    grid-column: span 8;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 1rem;
+    border: 1px dashed rgba(0,0,0,0.1);
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+}
+
+.action-btn:hover {
+    background: rgba(99, 102, 241, 0.05);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.action-btn i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* System Status */
+.widget-status {
+    grid-column: span 4;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.dot.warning { background: #f59e0b; }
+.dot.error { background: #ef4444; }
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+    .widget-stat { grid-column: span 6; }
+    .widget-actions { grid-column: span 12; }
+    .widget-status { grid-column: span 12; }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .widget-stat { grid-column: span 1; }
+    .widget-welcome h1 { font-size: 1.75rem; }
+    .welcome-date { display: none; }
+}
+

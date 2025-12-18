@@ -198,3 +198,4 @@ ws.onmessage = (event) => {
 
 **Purpose**: This sequence diagram demonstrates the event-driven architecture and proves understanding of real-time update mechanisms, showing how file changes trigger a cascade of processing steps that result in instant UI updates.
 
+

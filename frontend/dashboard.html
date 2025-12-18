@@ -39,18 +39,97 @@
     <link rel="stylesheet" href="styles/empty-states.css">
     <link rel="stylesheet" href="styles/enhanced-tooltips.css">
     <link rel="stylesheet" href="styles/enhanced-animations.css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/widgets.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+    <link rel="stylesheet" href="styles/glass-theme.css">
 </head>
 <body>
+    <!-- Sidebar Navigation -->
+    <nav class="modern-sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-logo">
+                <img src="assets/triple-a-logo.svg" alt="TripleA">
+                <span>Smart Solutions</span>
+            </a>
+        </div>
+        
+        <div class="sidebar-nav">
+            <div class="nav-category">Main Menu</div>
+            <a href="#" class="nav-item active" data-app="dashboard">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="apps/daily-plan.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Daily Plan</span>
+            </a>
+            <a href="apps/gallery.html" class="nav-item">
+                <i class="fas fa-images"></i>
+                <span>Gallery</span>
+            </a>
+            <a href="apps/dashboard.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Performance</span>
+            </a>
+            <a href="monitoring.html" class="nav-item">
+                <i class="fas fa-server"></i>
+                <span>System Health</span>
+            </a>
+            
+            <div class="nav-category">Management</div>
+            <a href="admin.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Admin Panel</span>
+            </a>
+            <a href="mockups-showcase.html" class="nav-item">
+                <i class="fas fa-layer-group"></i>
+                <span>Mockups</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-mini-profile">
+                <div class="user-avatar">AD</div>
+                <div class="user-info-text">
+                    <span class="user-name">Administrator</span>
+                    <span class="user-role">Super Admin</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="dashboard-container">
+        <!-- Toggle Button -->
+        <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <header class="dashboard-header">
             <div class="header-left">
-                <img src="assets/triple-a-logo.svg" alt="TripleA Logo" class="logo" aria-hidden="true">
-                <div class="header-title-group">
-                    <h1 class="premium-title" style="font-size: 2rem; margin: 0;">Smart Solutions</h1>
-                    <span class="premium-subtitle-small">by TripleA</span>
+                <!-- Logo removed here as it's in sidebar now -->
+                <div class="header-title-group" style="margin-left: 3rem;">
+                    <h1 class="premium-title" style="font-size: 2rem; margin: 0;">Dashboard</h1>
+                    <span class="premium-subtitle-small" id="currentDate"></span>
                 </div>
             </div>
             <div class="header-right">
+                <!-- Notification Bell -->
+                <div class="notification-wrapper">
+                    <button id="notificationBell" class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="notification-panel" id="notificationPanel">
+                        <div class="panel-header">
+                            <h3>Notifications</h3>
+                            <span class="mark-read">Mark all as read</span>
+                        </div>
+                        <div class="notification-list">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                </div>
+
                 <span class="user-info" id="userInfo"></span>
                 <button class="logout-button" id="logoutBtn" aria-label="Logout">
                     <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
@@ -60,10 +139,95 @@
         </header>
         
         <main class="dashboard-main">
-            <div class="apps-grid" id="appsGrid">
+            <!-- New Widget Grid -->
+            <div class="dashboard-grid">
+                <!-- Welcome Widget -->
+                <div class="widget widget-welcome">
+                    <div class="welcome-content">
+                        <h1>Welcome back, Admin!</h1>
+                        <p>Here's what's happening in your system today.</p>
+                        <div class="action-buttons">
+                            <button class="premium-button" onclick="window.location.href='apps/daily-plan.html'">
+                                <i class="fas fa-plus"></i> New Task
+                            </button>
+                            <button class="premium-button secondary" onclick="window.location.href='apps/gallery.html'">
+                                <i class="fas fa-upload"></i> Upload Media
+                            </button>
+                        </div>
+                    </div>
+                    <div class="welcome-date" id="currentTime">12:00 PM</div>
+                    <!-- Decorative Circle -->
+                    <div style="position: absolute; right: -50px; bottom: -50px; width: 300px; height: 300px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                </div>
+
+                <!-- Stats Widgets -->
+                <div class="widget widget-stat">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>Active Users</h3>
+                        <div class="value">124</div>
+                    </div>
+                </div>
+                <div class="widget widget-stat">
+                    <div class="stat-icon"><i class="fas fa-hdd"></i></div>
+                    <div class="stat-info">
+                        <h3>Storage Used</h3>
+                        <div class="value">45%</div>
+                    </div>
+                </div>
+                <div class="widget widget-stat">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Tasks Done</h3>
+                        <div class="value">28</div>
+                    </div>
+                </div>
+                <div class="widget widget-stat">
+                    <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="stat-info">
+                        <h3>System Load</h3>
+                        <div class="value">12%</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Widget -->
+                <div class="widget widget-actions">
+                    <h3 style="margin-bottom: 1rem;">Quick Access</h3>
+                    <div class="apps-grid" id="appsGrid">
+                        <!-- Original App Cards will be injected here via JS -->
+                    </div>
+                </div>
+
+                <!-- System Status Widget -->
+                <div class="widget widget-status">
+                    <h3 style="margin-bottom: 1rem;">System Status</h3>
+                    <div class="status-item">
+                        <span>Database</span>
+                        <div class="status-indicator">
+                            <span class="dot"></span>
+                            <span style="font-size: 0.8rem; color: #10b981;">Operational</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <span>File Server</span>
+                        <div class="status-indicator">
+                            <span class="dot"></span>
+                            <span style="font-size: 0.8rem; color: #10b981;">Online</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <span>Backup Service</span>
+                        <div class="status-indicator">
+                            <span class="dot warning"></span>
+                            <span style="font-size: 0.8rem; color: #f59e0b;">Syncing</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
+    
+    <script src="scripts/modern-ui.js"></script>
     
     <script src="scripts/dashboard.js"></script>
     <script src="scripts/analytics.js"></script>

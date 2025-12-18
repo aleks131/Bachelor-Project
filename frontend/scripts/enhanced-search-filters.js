@@ -207,3 +207,4 @@ class EnhancedSearch {
 
 window.enhancedSearch = new EnhancedSearch();
 
+
