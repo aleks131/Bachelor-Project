@@ -276,7 +276,10 @@ class ImageGallery {
             if (activeVideo) activeVideo.style.display = 'none';
             if (activeImage) {
                 activeImage.style.display = 'block';
+                // DIRECT LOADING - Bypassing SmartImage
+                activeImage.src = media.fullPath;
                 
+                /*
                 // Use smart image loading
                 if (window.smartImage) {
                     const container = activeImage.closest('.media-container, .image-container');
@@ -292,6 +295,7 @@ class ImageGallery {
                 } else {
                     activeImage.src = media.fullPath;
                 }
+                */
             }
         }
 

@@ -182,6 +182,12 @@ class DailyPlanViewer {
         const image = scheduleImages[0];
         this.currentImage = image;
         
+        // DIRECT LOADING - Bypassing SmartImage due to API errors
+        this.planImage.src = image.fullPath;
+        this.planImage.style.display = 'block';
+        this.noImage.style.display = 'none';
+        
+        /*
         // Use smart image loading if available
         if (window.smartImage) {
             const container = this.planImage.closest('.plan-image-container');
@@ -206,6 +212,7 @@ class DailyPlanViewer {
             this.planImage.style.display = 'block';
             this.noImage.style.display = 'none';
         }
+        */
         
         // Track image view
         if (window.analytics) {
