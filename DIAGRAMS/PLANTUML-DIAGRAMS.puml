@@ -1,6 +1,7 @@
 @startuml Diagram-01-High-Level-Architecture
 !theme plain
-title High-Level Architecture Diagram\nSmart Solutions by TripleA
+title High-Level Architecture Diagram
+subtitle Smart Solutions by TripleA
 
 skinparam componentStyle rectangle
 skinparam linetype ortho
@@ -62,7 +63,8 @@ end note
 
 @startuml Diagram-02-Software-Stack
 !theme plain
-title Software Stack Diagram (Layered Architecture)\nSmart Solutions by TripleA
+title Software Stack Diagram (Layered Architecture)
+subtitle Smart Solutions by TripleA
 
 skinparam componentStyle rectangle
 skinparam linetype ortho
@@ -151,7 +153,8 @@ end note
 
 @startuml Diagram-03-Sequence-Real-Time-Update
 !theme plain
-title Sequence Diagram: Real-Time File Update\nSmart Solutions by TripleA
+title Sequence Diagram: Real-Time File Update
+subtitle Smart Solutions by TripleA
 
 actor User
 participant "Network Drive" as NetworkDrive
@@ -220,7 +223,8 @@ end note
 
 @startuml Diagram-04-Activity-Image-Optimization
 !theme plain
-title Activity Diagram: Smart Image Optimization\nSmart Solutions by TripleA
+title Activity Diagram: Smart Image Optimization
+subtitle Smart Solutions by TripleA
 
 start
 
@@ -264,7 +268,8 @@ end note
 
 @startuml Diagram-05-Security-RBAC
 !theme plain
-title Security Flowchart (RBAC - Role-Based Access Control)\nSmart Solutions by TripleA
+title Security Flowchart (RBAC - Role-Based Access Control)
+subtitle Smart Solutions by TripleA
 
 start
 
@@ -317,7 +322,8 @@ end note
 
 @startuml Diagram-06-Data-Schema
 !theme plain
-title Data Schema Documentation (JSON Structure)\nSmart Solutions by TripleA
+title Data Schema Documentation (JSON Structure)
+subtitle Smart Solutions by TripleA
 
 package "users.json" {
   class User {
@@ -435,7 +441,8 @@ end note
 
 @startuml Diagram-07-UI-Sitemap
 !theme plain
-title UI/UX Sitemap\nSmart Solutions by TripleA
+title UI/UX Sitemap
+subtitle Smart Solutions by TripleA
 
 skinparam componentStyle rectangle
 skinparam linetype ortho
@@ -537,7 +544,8 @@ end note
 
 @startuml Diagram-08-Deployment
 !theme plain
-title Deployment Diagram\nSmart Solutions by TripleA
+title Deployment Diagram
+subtitle Smart Solutions by TripleA
 
 skinparam componentStyle rectangle
 skinparam linetype ortho
@@ -613,7 +621,8 @@ end note
 
 @startuml Diagram-09-Code-Snippets
 !theme plain
-title Code Snippets (Key Algorithms)\nSmart Solutions by TripleA
+title Code Snippets (Key Algorithms)
+subtitle Smart Solutions by TripleA
 
 package "1. Chokidar Watcher Configuration" {
   class ChokidarWatcher {
@@ -719,7 +728,8 @@ end note
 
 @startuml Diagram-10-Use-Case
 !theme plain
-title Use Case Diagram\nSmart Solutions by TripleA
+title Use Case Diagram
+subtitle Smart Solutions by TripleA
 
 left to right direction
 
@@ -805,7 +815,8 @@ end note
 
 @startuml Diagram-11-User-Journey-Map
 !theme plain
-title User Journey Map: Productivity Problem Solution\nSmart Solutions by TripleA
+title User Journey Map: Productivity Problem Solution
+subtitle Smart Solutions by TripleA
 
 skinparam activity {
   BackgroundColor #E8F4F8
@@ -872,7 +883,8 @@ end note
 
 @startuml Diagram-12-Main-Sequence-System-Init-Login
 !theme plain
-title Main Sequence Diagram: System Initialization & Login Flow\nSmart Solutions by TripleA
+title Main Sequence Diagram: System Initialization & Login Flow
+subtitle Smart Solutions by TripleA
 
 actor User
 participant "Browser" as Browser
