@@ -1,6 +1,6 @@
 {
   "name": "smart-solutions-triplea",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Enterprise-grade unified application platform for managing daily operations, image galleries, and performance dashboards",
   "main": "backend/server.js",
   "scripts": {
