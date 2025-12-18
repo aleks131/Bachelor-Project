@@ -8,6 +8,16 @@ const config = require('../../data/config.json');
 const router = express.Router();
 const SUPPORTED_FORMATS = config.supportedFormats.map(f => f.toLowerCase());
 
+function resolvePath(inputPath) {
+    if (!inputPath) {
+        return path.join(__dirname, '../../data/content/demo-images');
+    }
+    if (path.isAbsolute(inputPath)) {
+        return path.normalize(inputPath);
+    }
+    return path.resolve(path.join(__dirname, '../../', inputPath));
+}
+
 function getMediaType(extension) {
     const videoFormats = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.flv'];
     return videoFormats.includes(extension.toLowerCase()) ? 'video' : 'image';
@@ -23,17 +33,22 @@ function getDashboardFiles(imagesDir, extraDir, kpiDir) {
     ];
     
     directories.forEach(({ path: dirPath, key, name }) => {
-        if (!dirPath || !fs.existsSync(dirPath)) {
-            console.log(`${name} directory not found: ${dirPath}`);
+        const absolutePath = resolvePath(dirPath);
+        console.log(`[Dashboard] Checking ${name} path: ${dirPath} -> ${absolutePath}`);
+        
+        if (!absolutePath || !fs.existsSync(absolutePath)) {
+            console.log(`[Dashboard] ${name} directory not found: ${absolutePath}`);
             return;
         }
 
         try {
-            const rootFiles = fs.readdirSync(dirPath)
+            const rootFiles = fs.readdirSync(absolutePath)
                 .filter(file => {
-                    const filePath = path.join(dirPath, file);
-                    const isFile = fs.statSync(filePath).isFile();
-                    return isFile && SUPPORTED_FORMATS.includes(path.extname(file).toLowerCase());
+                    const filePath = path.join(absolutePath, file);
+                    try {
+                        const isFile = fs.statSync(filePath).isFile();
+                        return isFile && SUPPORTED_FORMATS.includes(path.extname(file).toLowerCase());
+                    } catch(e) { return false; }
                 })
                 .map(file => {
                     const relativePath = key === 'main' ? file : `${key}/${file}`;
@@ -48,16 +63,21 @@ function getDashboardFiles(imagesDir, extraDir, kpiDir) {
 
             if (rootFiles.length > 0) {
                 data[key] = rootFiles;
+                console.log(`[Dashboard] Found ${rootFiles.length} root files in ${name}`);
             }
             
-            const folders = fs.readdirSync(dirPath)
+            const folders = fs.readdirSync(absolutePath)
                 .filter(item => {
-                    const folderPath = path.join(dirPath, item);
-                    return fs.statSync(folderPath).isDirectory();
+                    const folderPath = path.join(absolutePath, item);
+                    try {
+                        return fs.statSync(folderPath).isDirectory();
+                    } catch(e) { return false; }
                 });
             
+            console.log(`[Dashboard] Found folders in ${name}: ${folders.join(', ')}`);
+
             folders.forEach(folder => {
-                const folderPath = path.join(dirPath, folder);
+                const folderPath = path.join(absolutePath, folder);
                 try {
                     const files = fs.readdirSync(folderPath)
                         .filter(file => SUPPORTED_FORMATS.includes(
@@ -73,6 +93,7 @@ function getDashboardFiles(imagesDir, extraDir, kpiDir) {
                     
                     if (files.length > 0) {
                         data[`${key}_${folder}`] = files;
+                        console.log(`[Dashboard] Folder '${folder}' has ${files.length} valid files`);
                     }
                 } catch (folderError) {
                     console.error(`Error reading folder ${folder}:`, folderError);
@@ -197,9 +218,9 @@ router.get('/images', (req, res) => {
         return res.status(403).json({ error: 'User network paths not configured' });
     }
 
-    const imagesDir = user.networkPaths.main ? path.normalize(user.networkPaths.main) : null;
-    const extraDir = user.networkPaths.extra ? path.normalize(user.networkPaths.extra) : null;
-    const kpiDir = user.networkPaths.kpi ? path.normalize(user.networkPaths.kpi) : null;
+    const imagesDir = user.networkPaths.main || 'data/content/demo-images';
+    const extraDir = user.networkPaths.extra || 'data/content/demo-images';
+    const kpiDir = user.networkPaths.kpi || 'data/content/demo-images/kpi';
 
     try {
         const data = getDashboardFiles(imagesDir, extraDir, kpiDir);
@@ -214,29 +235,26 @@ router.get('/images/*', (req, res) => {
     const user = req.user;
     const filePath = req.params[0];
     
-    const imagesDir = user.networkPaths.main ? path.normalize(user.networkPaths.main) : null;
-    const extraDir = user.networkPaths.extra ? path.normalize(user.networkPaths.extra) : null;
-    const kpiDir = user.networkPaths.kpi ? path.normalize(user.networkPaths.kpi) : null;
+    const imagesDir = resolvePath(user.networkPaths.main || 'data/content/demo-images');
+    const extraDir = resolvePath(user.networkPaths.extra || 'data/content/demo-images');
+    const kpiDir = resolvePath(user.networkPaths.kpi || 'data/content/demo-images/kpi');
     
     let fullPath = null;
     
     if (filePath.startsWith('extra/')) {
-        if (extraDir) {
-            fullPath = path.join(extraDir, filePath.replace('extra/', ''));
-        }
+        fullPath = path.join(extraDir, filePath.replace('extra/', ''));
     } else if (filePath.startsWith('kpi/')) {
-        if (kpiDir) {
-            fullPath = path.join(kpiDir, filePath.replace('kpi/', ''));
-        }
+        fullPath = path.join(kpiDir, filePath.replace('kpi/', ''));
     } else {
-        if (imagesDir) {
-            fullPath = path.join(imagesDir, filePath);
-        }
+        fullPath = path.join(imagesDir, filePath);
     }
+    
+    console.log(`[Dashboard] Serving file: ${filePath} -> ${fullPath}`);
     
     if (fullPath && fs.existsSync(fullPath)) {
         res.sendFile(fullPath);
     } else {
+        console.error(`[Dashboard] File not found: ${fullPath}`);
         res.status(404).send('File not found');
     }
 });
@@ -277,19 +295,20 @@ router.get('/files', (req, res) => {
     const directory = req.query.dir || 'main';
     
     let basePath;
-    if (directory === 'extra' && user.networkPaths.extra) {
-        basePath = path.normalize(user.networkPaths.extra);
-    } else if (directory === 'kpi-meeting' && user.networkPaths.kpi) {
-        basePath = path.normalize(user.networkPaths.kpi);
-    } else if (user.networkPaths.main) {
-        basePath = path.normalize(user.networkPaths.main);
+    if (directory === 'extra') {
+        basePath = resolvePath(user.networkPaths.extra || 'data/content/demo-images');
+    } else if (directory === 'kpi-meeting' || directory === 'kpi') {
+        basePath = resolvePath(user.networkPaths.kpi || 'data/content/demo-images/kpi');
     } else {
-        return res.status(500).json({ error: 'Directory path not configured' });
+        basePath = resolvePath(user.networkPaths.main || 'data/content/demo-images');
     }
+    
+    console.log(`[Dashboard] Loading files from: ${directory} -> ${basePath}`);
     
     try {
         if (!fs.existsSync(basePath)) {
-            return res.status(404).json({ error: 'Directory not found' });
+            console.error(`[Dashboard] Directory not found: ${basePath}`);
+            return res.status(404).json({ error: 'Directory not found', path: basePath });
         }
         
         const dirContents = fs.readdirSync(basePath);
