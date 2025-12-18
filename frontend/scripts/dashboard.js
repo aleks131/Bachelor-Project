@@ -22,7 +22,25 @@ async function loadUserData() {
         const configData = await configResponse.json();
         appConfig = configData;
         
-        // User info removed for cleaner UI - user info is in sidebar
+        // Update User Info in Sidebar
+        const userNameEl = document.querySelector('.user-name');
+        const userRoleEl = document.querySelector('.user-role');
+        const userAvatarEl = document.querySelector('.user-avatar');
+        
+        if (userNameEl) userNameEl.textContent = currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1);
+        if (userRoleEl) userRoleEl.textContent = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+        if (userAvatarEl) userAvatarEl.textContent = currentUser.username.substring(0, 2).toUpperCase();
+        
+        // Handle Admin-only Sidebar Items
+        if (currentUser.role === 'admin') {
+            const adminSection = document.getElementById('adminSection');
+            const adminLink = document.getElementById('adminLink');
+            const monitoringLink = document.getElementById('monitoringLink');
+            
+            if (adminSection) adminSection.style.display = 'block';
+            if (adminLink) adminLink.style.display = 'flex';
+            if (monitoringLink) monitoringLink.style.display = 'flex';
+        }
     } catch (error) {
         console.error('Error loading user data:', error);
         window.location.href = '/';
@@ -66,15 +84,15 @@ function renderApps() {
     }
     
     appsGrid.innerHTML += `
-        <div class="app-card premium-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; cursor: pointer;" onclick="window.location.href='/mockups-showcase'">
+        <div class="app-card premium-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; cursor: pointer;" onclick="window.location.href='user-guide.html'">
             <div class="app-icon premium-icon-large" style="color: white;">
-                <i class="fas fa-images"></i>
+                <i class="fas fa-book"></i>
             </div>
-            <h3 class="premium-section-title" style="font-size: 2rem; margin-bottom: 1rem; color: white;">Software Showcase</h3>
-            <p style="font-size: 1.125rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">View all mockup images showing software functionality</p>
-            <button class="premium-button" style="background: white; color: #667eea;" onclick="window.location.href='/mockups-showcase'; event.stopPropagation();">
-                <i class="fas fa-eye"></i>
-                <span>View Showcase</span>
+            <h3 class="premium-section-title" style="font-size: 2rem; margin-bottom: 1rem; color: white;">User Guide</h3>
+            <p style="font-size: 1.125rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Comprehensive guide on system functions and features</p>
+            <button class="premium-button" style="background: white; color: #667eea;" onclick="window.location.href='user-guide.html'; event.stopPropagation();">
+                <i class="fas fa-arrow-right"></i>
+                <span>Open Guide</span>
             </button>
         </div>
     `;

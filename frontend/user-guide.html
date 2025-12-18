@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>User Guide - Smart Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="assets/triple-a-logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/premium-theme.css">
+    <link rel="stylesheet" href="styles/premium-ui.css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+    <style>
+        .guide-container {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            transition: margin-left 0.3s ease;
+        }
+        body:not(.sidebar-open) .guide-container {
+            margin-left: 0;
+        }
+        
+        .guide-header {
+            margin-bottom: 40px;
+        }
+        .guide-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .guide-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .guide-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .role-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        .role-admin { background: #fee2e2; color: #ef4444; }
+        .role-manager { background: #e0e7ff; color: #6366f1; }
+        .role-operator { background: #dcfce7; color: #22c55e; }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-item {
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .feature-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="sidebar-open">
+    <nav class="modern-sidebar">
+        <div class="sidebar-header">
+            <a href="/dashboard" class="sidebar-logo">
+                <img src="assets/triple-a-logo.svg" alt="TripleA">
+                <span>Smart Solutions</span>
+            </a>
+        </div>
+        <div class="sidebar-nav">
+            <a href="/dashboard" class="nav-item">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </a>
+            <div class="nav-category">Guide Sections</div>
+            <a href="#getting-started" class="nav-item active">
+                <i class="fas fa-rocket"></i>
+                <span>Getting Started</span>
+            </a>
+            <a href="#roles" class="nav-item">
+                <i class="fas fa-user-tag"></i>
+                <span>User Roles</span>
+            </a>
+            <a href="#features" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>Key Features</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="guide-container">
+        <div class="guide-header">
+            <h1>User Guide & Functions</h1>
+            <p>Comprehensive documentation for the Smart Solutions platform.</p>
+        </div>
+
+        <section id="getting-started" class="guide-section">
+            <h2><i class="fas fa-rocket"></i> Getting Started</h2>
+            <p>Welcome to Smart Solutions by TripleA. This unified platform integrates Daily Planning, Image Galleries, and Performance Dashboards into one seamless experience.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h3>Login</h3>
+                    <p>Access the system using your assigned username and password. Your role determines which applications you can access.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-th-large"></i>
+                    <h3>Dashboard</h3>
+                    <p>The central hub showing system status, notifications, and quick access to all your enabled applications.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>Local Content</h3>
+                    <p>The system now uses optimized local folders for faster media loading and better reliability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roles" class="guide-section">
+            <h2><i class="fas fa-users-cog"></i> Role-Based Access</h2>
+            <p>The system is secured with role-based permissions. Here is what each user type can see and do:</p>
+            
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 15px;"><span class="role-badge role-admin">ADMIN</span> Administrator</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Full system access</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> User management (Create/Edit/Delete users)</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> System configuration & Monitoring</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Access to all applications</li>
+                </ul>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 15px;"><span class="role-badge role-manager">MANAGER</span> Manager</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Performance Dashboard access</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Gallery management</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Can view but not edit system settings</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 15px;"><span class="role-badge role-operator">OPERATOR</span> Operator</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Daily Plan Viewer access</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> View-only access to assigned content</li>
+                    <li><i class="fas fa-check" style="color: green; margin-right: 10px;"></i> Simplified interface for daily tasks</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="features" class="guide-section">
+            <h2><i class="fas fa-layer-group"></i> Core Functions</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Daily Plan</h3>
+                    <p>Automated schedule display that changes based on time of day (Morning, Evening, Night shifts).</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-images"></i>
+                    <h3>Gallery</h3>
+                    <p>High-performance image and video viewer with folder navigation and slideshow capabilities.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance</h3>
+                    <p>Visual KPI tracking with customizable widgets and real-time data updates.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
